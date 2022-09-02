@@ -3,23 +3,30 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from apps.home import blueprint
 from flask import render_template, request
 from flask_login import login_required
 from jinja2 import TemplateNotFound
+
+from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
+from apps.home import blueprint
 
 
 @blueprint.route('/index')
 @login_required
 def index():
+    cmc = CryptoMarket()
 
-    return render_template('home/index.html', segment='index')
+    df = cmc.get_cryptos_names().sort_values(by='rank').head(10)
+    columns = ["CMC Id", "Name", "Rank", "Slug"]
+
+    table_d = df.to_dict(orient='index')
+
+    return render_template('home/index.html', segment='index', table_data=table_d, columns=columns)
 
 
 @blueprint.route('/<template>')
 @login_required
 def route_template(template):
-
     try:
 
         if not template.endswith('.html'):
@@ -40,7 +47,6 @@ def route_template(template):
 
 # Helper - Extract current page name from request
 def get_segment(request):
-
     try:
 
         segment = request.path.split('/')[-1]
