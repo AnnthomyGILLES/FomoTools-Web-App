@@ -34,7 +34,7 @@ class CryptoMarket(object):
         self.cache_file_path = Path(tempfile.gettempdir(), cache_filename)
         print(self.cache_file_path)
         self.session = requests_cache.CachedSession(cache_name=str(self.cache_file_path), backend='sqlite',
-                                                    expire_after=120)
+                                                    expire_after=864000)
         self.session.headers.update(self.HEADERS)
 
     def get(self, url, **kwargs):
