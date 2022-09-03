@@ -15,8 +15,8 @@ class Crypto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     slug = db.Column(db.String(64), unique=True)
     symbol = db.Column(db.String(64), unique=True)
-    cmc_id = db.Column(db.Integer, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # cmc_id = db.Column(db.Integer, unique=True)
+    users_name = db.Column(db.String(64), db.ForeignKey('users.username'))
 
     def __repr__(self):
         return '<Role %r>' % self.name
@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.LargeBinary)
 
-    # crypto_id = db.relationship('Crypto', back_populates='users')
+    crypto_id = db.relationship('Crypto', backref='users')
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
