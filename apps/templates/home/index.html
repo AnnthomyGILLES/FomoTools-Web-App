@@ -93,6 +93,42 @@
                                 </div>
                             </div>
                             <!--[ year  sales section ] end-->
+                            <div class="col-xl-12 col-md-12">
+                                <div class="card Recent-Users">
+                                    <div class="card-header">
+                                        <h5>Cryptos added by user</h5>
+                                    </div>
+                                    <div class="card-block px-0 py-3">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                {% for c in ["test1", "test2", "test3"] %}
+                                                <th>{{c}}</th>
+                                                {% endfor %}
+                                                </thead>
+                                                <tbody>
+                                                {% for crypto in cryptos %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;"
+                                                             src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
+                                                             alt="activity-user">
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{crypto.slug}}</h6>
+                                                        <p class="m-0">{{crypto.symbol}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">test</h6>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!--[ Recent Users ] start-->
                             <div class="col-xl-12 col-md-12">
                                 <div class="card Recent-Users">
@@ -132,6 +168,7 @@
                                 </div>
                             </div>
                             <!--[ Recent Users ] end-->
+
 
                             <!--[social-media section] start-->
                             <div class="col-md-12 col-xl-4">
