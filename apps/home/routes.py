@@ -3,7 +3,7 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_required, current_user
 from jinja2 import TemplateNotFound
 
@@ -50,11 +50,10 @@ def route_template(template):
             elif not symbol:
                 flash('Symbol is required!')
             else:
-                student = Crypto(slug=slug,
-                                 symbol=symbol, users_name=current_user.username)
-                db.session.add(student)
+                crypto = Crypto(slug=slug, symbol=symbol, users_name=current_user.username)
+                db.session.add(crypto)
                 db.session.commit()
-                return redirect(url_for('index'))
+                return redirect(url_for('home_blueprint.index'))
 
         # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template("home/" + template, segment=segment)
