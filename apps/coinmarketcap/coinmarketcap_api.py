@@ -2,6 +2,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
+from typing import Union
 
 import pandas as pd
 import requests_cache
@@ -32,7 +33,6 @@ class CryptoMarket(object):
         self.base_url = base_url
         cache_filename = 'coinmarketcap_cache'
         self.cache_file_path = Path(tempfile.gettempdir(), cache_filename)
-        print(self.cache_file_path)
         self.session = requests_cache.CachedSession(cache_name=str(self.cache_file_path), backend='sqlite',
                                                     expire_after=864000)
         self.session.headers.update(self.HEADERS)
@@ -47,21 +47,21 @@ class CryptoMarket(object):
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             logger.warning(f"Error while fetching Url: {url}, with Parameters: {kwargs} and Error: {e}")
 
-    def get_quotes(self, **params: dict) -> pd.DataFrame:
+    def get_quotes(self, **params: Union[dict, object]) -> pd.DataFrame:
         """See also: https://coinmarketcap.com/api/documentation/v1/#operation/getV2CryptocurrencyQuotesLatest"""
         url = self.ENDPOINTS["quotes"]
         response = self.get(url, **params)
         df = pd.json_normalize(response['data'])
         return df
 
-    def get_listings(self, **params: dict) -> pd.DataFrame:
+    def get_listings(self, **params: Union[dict, object]) -> pd.DataFrame:
         """See also: https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsLatest"""
         url = self.ENDPOINTS["listings"]
         response = self.get(url, **params)
         df = pd.json_normalize(response['data'])
         return df
 
-    def get_cryptos_names(self, **params):
+    def get_cryptos_names(self, **params: Union[dict, object]):
         """See also https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap"""
         url = self.ENDPOINTS["map"]
         response = self.get(url, **params)
