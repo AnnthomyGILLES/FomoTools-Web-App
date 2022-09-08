@@ -77,6 +77,7 @@ QNOLmmS/tvUjvSBs7D6hiQHFn2YAQizbjreKpSidMr0E76RUY9axOfWiQCC6+bpk
 W5WQ61jjF0pY+kq3dg233AN9TAWUJVDh5rBz6OeMlxE8ROBE+XohUCtjzaUhfO4s
 -----END RSA PRIVATE KEY-----"
         port: 22
+        passphrase: taplecod
         script: |
           echo "triggered" >> ../githubactions.log
           cd ~/FomoTools/
