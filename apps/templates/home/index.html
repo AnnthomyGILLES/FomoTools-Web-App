@@ -102,12 +102,12 @@
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
-                                                {% for c in ["test1", "test2", "test3"] %}
+                                                {% for c in ["Id", "Slug/Symbol", "Low Threshold", "High Threshold"] %}
                                                 <th>{{c}}</th>
                                                 {% endfor %}
                                                 </thead>
                                                 <tbody>
-                                                {% for crypto in cryptos %}
+                                                {% for _, crypto in cryptos.items() %}
                                                 <tr class="unread">
                                                     <td><img class="rounded-circle" style="width:40px;"
                                                              src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
@@ -118,7 +118,10 @@
                                                         <p class="m-0">{{crypto.symbol}}</p>
                                                     </td>
                                                     <td>
-                                                        <h6 class="text-muted">test</h6>
+                                                        <h6 class="text-muted">{{crypto.low_threshold}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">{{crypto.high_threshold}}</h6>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}

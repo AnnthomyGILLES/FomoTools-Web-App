@@ -2,33 +2,60 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-
+import pandas as pd
 from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_required, current_user
 from jinja2 import TemplateNotFound
 
 from apps import db
-from apps.authentication.models import Crypto
+from apps.authentication.models import Crypto, Alert, User
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.home import blueprint
 
 
-@blueprint.route('/index')
+@blueprint.route("/index")
 @login_required
 def index():
     cmc = CryptoMarket()
 
-    df = cmc.get_cryptos_names().sort_values(by='rank').head(10)
+    df = cmc.get_cryptos_names().sort_values(by="rank").head(10)
     columns = ["CMC Id", "Name", "Rank", "Slug"]
 
-    table_d = df.to_dict(orient='index')
+    table_d = df.to_dict(orient="index")
 
     # User.query.filter_by(username='peter')
     username = current_user.username
-    cryptos = Crypto.query.filter(Crypto.users_name == username).all()
 
-    return render_template('home/index.html', segment='index', table_data=table_d, columns=columns, cryptos=cryptos)
+    df = pd.read_sql(
+        sql=db.session.query(
+            User.username,
+            Crypto.slug,
+            Crypto.symbol,
+            Alert.low_threshold,
+            Alert.high_threshold,
+        )
+        .filter(
+            User.username == Crypto.users_name,
+        )
+        .filter(
+            Crypto.symbol == Alert.symbol,
+        )
+        .filter(
+            User.username == username,
+        )
+        .statement,
+        con=db.session.bind,
+    )
 
+    cryptos = df.to_dict(orient="index")
+
+    return render_template(
+        "home/index.html",
+        segment="index",
+        table_data=table_d,
+        columns=columns,
+        cryptos=cryptos,
+    )
 
 
 @blueprint.route("/<template>", methods=("GET", "POST"))
@@ -102,10 +129,10 @@ def get_or_create(session, model, **kwargs):
 def get_segment(request):
     try:
 
-        segment = request.path.split('/')[-1]
+        segment = request.path.split("/")[-1]
 
-        if segment == '':
-            segment = 'index'
+        if segment == "":
+            segment = "index"
 
         return segment
 
