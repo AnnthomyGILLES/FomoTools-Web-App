@@ -30,39 +30,72 @@ def index():
     return render_template('home/index.html', segment='index', table_data=table_d, columns=columns, cryptos=cryptos)
 
 
-@blueprint.route('/<template>', methods=('GET', 'POST'))
+
+@blueprint.route("/<template>", methods=("GET", "POST"))
 @login_required
 def route_template(template):
     try:
 
-        if not template.endswith('.html'):
-            template += '.html'
+        if not template.endswith(".html"):
+            template += ".html"
 
         # Detect the current page
         segment = get_segment(request)
 
-        if request.method == 'POST':
-            slug = request.form['exampleInputEmail1']
-            symbol = request.form['exampleInputSymbol']
+        if request.method == "POST":
+            slug = request.form["exampleInputEmail1"]
+            symbol = request.form["exampleInputSymbol"]
+
+            low_threshold = request.form["exampleInputLowThreshold"]
+            high_threshold = request.form["exampleInputHighThreshold"]
 
             if not slug:
-                flash('Slug is required!')
+                flash("Slug is required!")
             elif not symbol:
-                flash('Symbol is required!')
+                flash("Symbol is required!")
             else:
-                crypto = Crypto(slug=slug, symbol=symbol, users_name=current_user.username)
+                user_id = (
+                    User.query.filter(User.username == current_user.username).first().id
+                )
+                crypto = get_or_create(
+                    db.session,
+                    Crypto,
+                    slug=slug,
+                    symbol=symbol,
+                    users_name=current_user.username,
+                )
+
+                alert = get_or_create(
+                    db.session,
+                    Alert,
+                    low_threshold=low_threshold,
+                    high_threshold=high_threshold,
+                    user_id=user_id,
+                    symbol=symbol,
+                )
+
                 db.session.add(crypto)
+                db.session.add(alert)
                 db.session.commit()
-                return redirect(url_for('home_blueprint.index'))
+                return redirect(url_for("home_blueprint.index"))
 
         # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template("home/" + template, segment=segment)
 
     except TemplateNotFound:
-        return render_template('home/page-404.html'), 404
+        return render_template("home/page-404.html"), 404
 
     except:
-        return render_template('home/page-500.html'), 500
+        return render_template("home/page-500.html"), 500
+
+
+def get_or_create(session, model, **kwargs):
+    instance = session.query(model).filter_by(**kwargs).first()
+    if instance:
+        return instance
+    else:
+        instance = model(**kwargs)
+        return instance
 
 
 # Helper - Extract current page name from request
