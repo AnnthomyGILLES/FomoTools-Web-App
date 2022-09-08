@@ -22,7 +22,7 @@ jobs:
       with:
         host: 167.86.74.118
         username: Fomotools
-        key: -----BEGIN RSA PRIVATE KEY-----
+        key: "-----BEGIN RSA PRIVATE KEY-----
 Proc-Type: 4,ENCRYPTED
 DEK-Info: AES-128-CBC,3AF6BC47A50F4AE816B6B09FBA59E4B7
 
@@ -75,7 +75,7 @@ uuE8moA3WDpU+R6hklHvwm8k7W7ftdbGHMPikMhvQUPsBOvcIHlj7YjLUv6pqaNH
 W/Ex6e72SklkQPq6o3RXv6QFTM+DnY0GAQx97BM2GyzFZ44kWzods6si6JMelIw5
 QNOLmmS/tvUjvSBs7D6hiQHFn2YAQizbjreKpSidMr0E76RUY9axOfWiQCC6+bpk
 W5WQ61jjF0pY+kq3dg233AN9TAWUJVDh5rBz6OeMlxE8ROBE+XohUCtjzaUhfO4s
------END RSA PRIVATE KEY-----
+-----END RSA PRIVATE KEY-----"
         port: 22
         script: |
           echo "triggered" >> ../githubactions.log
