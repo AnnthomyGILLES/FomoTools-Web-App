@@ -24,9 +24,9 @@ jobs:
         username: Fomotools
         password: RpEEnjeq7VSyOZvkC3G6
         port: 22
-        script: |
-          echo "triggered" >> ../githubactions.log
+        script: | 
           cd ~/FomoTools/
+          echo "triggered" >> ../githubactions.log
           git pull
           git status
-          docker-compose up --build
+          /usr/local/bin/docker-compose up --build
