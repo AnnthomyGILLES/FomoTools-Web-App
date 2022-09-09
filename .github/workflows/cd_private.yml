@@ -29,4 +29,5 @@ jobs:
           echo "triggered" >> ../githubactions.log
           git pull
           git status
-          echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S /usr/local/bin/docker-compose up --build
+          echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S /usr/local/bin/docker-compose stop
+          echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S /usr/local/bin/docker-compose up --build -d
