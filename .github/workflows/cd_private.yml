@@ -24,7 +24,7 @@ jobs:
         username: Fomotools
         password: RpEEnjeq7VSyOZvkC3G6
         port: 22
-        run: | 
+        script: | 
           cd ~/FomoTools/
           echo "triggered" >> ../githubactions.log
           git pull
