@@ -77,11 +77,6 @@ class CryptoMarket(object):
         df = pd.json_normalize(response["data"])
         return df[["id", "name", "symbol", "slug", "rank"]]
 
-    def get_cryptos_names_json(self, **params: Union[dict, object]):
-            """See also https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap"""
-            url = self.ENDPOINTS["map"]
-            response = self.get(url, **params)
-            return response
 
 if __name__ == "__main__":
     cmc = CryptoMarket()
@@ -92,5 +87,4 @@ if __name__ == "__main__":
     # df = cmc.get_listings()
     # print(df.head())
 
-    cmc.get_cryptos_names()
-    print (cmc.get_cryptos_names_json())
+    # print(cmc.get_cryptos_names().name.to_string(index=False))

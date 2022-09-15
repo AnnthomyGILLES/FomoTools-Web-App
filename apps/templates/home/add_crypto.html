@@ -19,12 +19,12 @@
                         <div class="row align-items-center">
                             <div class="col-md-12">
                                 <div class="page-header-title">
-                                    <h5 class="m-b-10">Form Elements</h5>
+                                    <h5 class="m-b-10">Mes alertes</h5>
                                 </div>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Mes outils premiums</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Gérer mes alertes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -36,55 +36,186 @@
                         <!-- [ Main Content ] start -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5>Basic Componant</h5>
+                                <h5>Créer une alerte</h5>
+                                <hr>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item"> <a class="nav-link text-uppercase active show" id="price-tab" data-toggle="tab"
+                                        href="#price" role="tab" aria-controls="price" aria-selected="true">Prix</a>
+                                    </li>
+                                    <li class="nav-item"> <a class="nav-link text-uppercase" id="percentage-tab" data-toggle="tab" href="#percentage"
+                                        role="tab" aria-controls="percentage" aria-selected="false">Pourcentage</a> 
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="price" role="tabpanel" aria-labelledby="price-tab">
+                                        <div class="col-md-6">
+                                            <form method="post">
+                                                <div class="form-group"> 
+                                                    <label for="exampleFormControlSelect1"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option><i class="feather icon-mail"></i>Courriel</option>
+                                                        <option>Discord</option>
+                                                        <option>Navigateur</option>
+                                                        <option>Slack</option>
+                                                        <option>Telegram</option>
+                                                        <option>Webhook</option>
+                                                        <option>Whatsapp</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"> 
+                                                    <label for="exampleFormControlSelect1"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        {% for _, crypto in cryptos.items() %}
+                                                        <option>{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputLowThreshold"> <i class="feather icon-arrow-down"></i> passe en dessous de (€)</label>
+                                                    <input name="exampleInputLowThreshold" type="number"
+                                                            class="form-control" placeholder="1500"
+                                                            id="exampleInputLowThreshold"
+                                                            min="1" 
+                                                            step="any"
+                                                            value="{{ request.form['exampleInputLowThreshold'] }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputHighThreshold"> <i class="feather icon-arrow-up"></i>ou au dessus de (€)</label>
+                                                    <input name="exampleInputHighThreshold" type="number"
+                                                            class="form-control" placeholder="4500"
+                                                            id="exampleInputHighThreshold"
+                                                            min="1" 
+                                                            step="any"
+                                                            value="{{ request.form['exampleInputHighThreshold'] }}">
+                                                </div>
+                                                <div class="form-group form-check"> 
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <labelclass="form-check-label" for="exampleCheck1">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Créer l'alerte</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        <h5>Form controls</h5>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Slug</label>
-                                                        <input name="exampleInputEmail1" type="text"
-                                                               class="form-control" id="exampleInputEmail1"
-                                                               aria-describedby="emailHelp" placeholder="Enter email"
-                                                               value="{{ request.form['exampleInputEmail1'] }}">
-                                                        <small id="emailHelp" class="form-text text-muted">We'll never
-                                                            share your email with anyone else.</small>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputSymbol">Symbol</label>
-                                                        <input name="exampleInputSymbol" type="text"
-                                                               class="form-control" placeholder="Text"
-                                                               id="exampleInputSymbol"
-                                                               value="{{ request.form['exampleInputSymbol'] }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputLowThreshold">Low Threshold</label>
-                                                        <input name="exampleInputLowThreshold" type="text"
-                                                               class="form-control" placeholder="Text"
-                                                               id="exampleInputLowThreshold"
-                                                               value="{{ request.form['exampleInputLowThreshold'] }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputHighThreshold">High Threshold</label>
-                                                        <input name="exampleInputHighThreshold" type="text"
-                                                               class="form-control" placeholder="Text"
-                                                               id="exampleInputHighThreshold"
-                                                               value="{{ request.form['exampleInputHighThreshold'] }}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
-                                            </div>
+                                    <div class="tab-pane fade" id="percentage" role="tabpanel" aria-labelledby="percentage-tab">
+                                        <div class="col-md-6">
+                                            <form method="post">
+                                                <div class="form-group"> 
+                                                    <label for="exampleFormControlSelect1"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option><i class="feather icon-mail"></i>Courriel</option>
+                                                        <option>Discord</option>
+                                                        <option>Navigateur</option>
+                                                        <option>Slack</option>
+                                                        <option>Telegram</option>
+                                                        <option>Webhook</option>
+                                                        <option>Whatsapp</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"> 
+                                                    <label for="exampleFormControlSelect1"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        {% for _, crypto in cryptos.items() %}
+                                                        <option>{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputLowThreshold"> <i class="feather icon-arrow-down"></i> diminue de (%)</label>
+                                                    <input name="exampleInputLowThreshold" type="number"
+                                                            class="form-control" placeholder="20"
+                                                            id="exampleInputLowThreshold"
+                                                            min="1" 
+                                                            step="any"
+                                                            value="{{ request.form['exampleInputLowThreshold'] }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputHighThreshold"> <i class="feather icon-arrow-up"></i> ou augmente de (%)</label>
+                                                    <input name="exampleInputHighThreshold" type="number"
+                                                            class="form-control" placeholder="45"
+                                                            id="exampleInputHighThreshold"
+                                                            min="1" 
+                                                            step="any"
+                                                            value="{{ request.form['exampleInputHighThreshold'] }}">
+                                                </div>
+                                                <div class="form-group form-check"> 
+                                                    <input type="checkbox" class="form-check-input" id="snooze">
+                                                    <label class="form-check-label" for="exampleCheck1">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Créer l'alerte</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
-                        <!-- [ Main Content ] end -->
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Mes alertes</h5>
+                                <hr>
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Crypto</th>
+                                                        <th>Symbol</th>
+                                                        <th>Activated since</th>
+                                                        <th>Price when activated</th>
+                                                        <th>Current price (variation)</th>
+                                                        <th>Alert me if price below</th>
+                                                        <th>Alert me if price above</th>
+                                                        <th>Via</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Bictoin</td>
+                                                        <td>BTC</td>
+                                                        <td>15/09/2022 - 15:00 (UTC+2)</td>
+                                                        <td>15522.32€</td>
+                                                        <td>17489.32€ (+x%)</td>
+                                                        <td>14000€ (-x%)</td>
+                                                        <td>18000€ (+x%)</td>
+                                                        <td>Whatsapp, Discord</td>
+                                                        <td>Cancel / Update </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Litecoin</td>
+                                                        <td>LTC</td>
+                                                        <td>17/09/2022 - 15:00 (UTC+2)</td>
+                                                        <td>15522.32€</td>
+                                                        <td>17489.32€ (+x%)</td>
+                                                        <td>14000€ (-x%)</td>
+                                                        <td>18000€ (+x%)</td>
+                                                        <td>Whatsapp, Discord</td>
+                                                        <td>Cancel / Update </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Litecoin</td>
+                                                        <td>LTC</td>
+                                                        <td>17/09/2022 - 15:00 (UTC+2)</td>
+                                                        <td>15522.32€</td>
+                                                        <td>17489.32€ (+x%)</td>
+                                                        <td>14000€ (-x%)</td>
+                                                        <td>18000€ (+x%)</td>
+                                                        <td>Whatsapp, Discord</td>
+                                                        <td>Cancel / Update </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
                     </div>
                 </div>
             </div>
