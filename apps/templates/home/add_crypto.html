@@ -51,46 +51,46 @@
                                         <div class="col-md-6">
                                             <form method="post">
                                                 <div class="form-group"> 
-                                                    <label for="exampleFormControlSelect1"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
-                                                        <option><i class="feather icon-mail"></i>Courriel</option>
-                                                        <option>Discord</option>
-                                                        <option>Navigateur</option>
-                                                        <option>Slack</option>
-                                                        <option>Telegram</option>
-                                                        <option>Webhook</option>
-                                                        <option>Whatsapp</option>
+                                                    <label for="notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
+                                                    <select class="form-control" id="notification_method" name="notification_method">
+                                                        <option value="mail"><i class="feather icon-mail"></i>Courriel</option>
+                                                        <option value="discord">Discord</option>
+                                                        <option value="browser">Navigateur</option>
+                                                        <option value="slack">Slack</option>
+                                                        <option value="telegram">Telegram</option>
+                                                        <option value="webhook">Webhook</option>
+                                                        <option value="whatsapp">Whatsapp</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group"> 
-                                                    <label for="exampleFormControlSelect1"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                    <label for="crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
+                                                    <select class="form-control" id="crypto_selected" name="crypto_selected">
                                                         {% for _, crypto in cryptos.items() %}
-                                                        <option>{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
+                                                        <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputLowThreshold"> <i class="feather icon-arrow-down"></i> passe en dessous de (€)</label>
-                                                    <input name="exampleInputLowThreshold" type="number"
+                                                    <label for="LowThreshold"> <i class="feather icon-arrow-down"></i> passe en dessous de (€)</label>
+                                                    <input name="LowThreshold" type="number"
                                                             class="form-control" placeholder="1500"
-                                                            id="exampleInputLowThreshold"
+                                                            id="LowThreshold"
                                                             min="1" 
                                                             step="any"
-                                                            value="{{ request.form['exampleInputLowThreshold'] }}">
+                                                            value="{{request.form['LowThreshold'] }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputHighThreshold"> <i class="feather icon-arrow-up"></i>ou au dessus de (€)</label>
-                                                    <input name="exampleInputHighThreshold" type="number"
+                                                    <label for="HighThreshold"> <i class="feather icon-arrow-up"></i>ou au dessus de (€)</label>
+                                                    <input name="HighThreshold" type="number"
                                                             class="form-control" placeholder="4500"
-                                                            id="exampleInputHighThreshold"
+                                                            id="HighThreshold"
                                                             min="1" 
                                                             step="any"
-                                                            value="{{ request.form['exampleInputHighThreshold'] }}">
+                                                            value="{{ request.form['HighThreshold'] }}">
                                                 </div>
                                                 <div class="form-group form-check"> 
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <labelclass="form-check-label" for="exampleCheck1">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
+                                                    <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
+                                                    <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Créer l'alerte</button>
                                             </form>
@@ -100,46 +100,46 @@
                                         <div class="col-md-6">
                                             <form method="post">
                                                 <div class="form-group"> 
-                                                    <label for="exampleFormControlSelect1"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
-                                                        <option><i class="feather icon-mail"></i>Courriel</option>
-                                                        <option>Discord</option>
-                                                        <option>Navigateur</option>
-                                                        <option>Slack</option>
-                                                        <option>Telegram</option>
-                                                        <option>Webhook</option>
-                                                        <option>Whatsapp</option>
+                                                    <label for="notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
+                                                    <select class="form-control" id="notification_method" name="notification_method">
+                                                        <option value="mail"><i class="feather icon-mail"></i>Courriel</option>
+                                                        <option value="discord">Discord</option>
+                                                        <option value="browser">Navigateur</option>
+                                                        <option value="slack">Slack</option>
+                                                        <option value="telegram">Telegram</option>
+                                                        <option value="webhook">Webhook</option>
+                                                        <option value="whatsapp">Whatsapp</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group"> 
-                                                    <label for="exampleFormControlSelect1"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                    <label for="crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
+                                                    <select class="form-control" id="crypto_selected" name="crypto_selected">
                                                         {% for _, crypto in cryptos.items() %}
-                                                        <option>{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
+                                                        <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputLowThreshold"> <i class="feather icon-arrow-down"></i> diminue de (%)</label>
-                                                    <input name="exampleInputLowThreshold" type="number"
+                                                    <label for="LowThresholdPercent"> <i class="feather icon-arrow-down"></i> diminue de (%)</label>
+                                                    <input name="LowThresholdPercent" type="number"
                                                             class="form-control" placeholder="20"
-                                                            id="exampleInputLowThreshold"
+                                                            id="LowThresholdPercent"
                                                             min="1" 
                                                             step="any"
-                                                            value="{{ request.form['exampleInputLowThreshold'] }}">
+                                                            value="{{request.form['LowThresholdPercent'] }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputHighThreshold"> <i class="feather icon-arrow-up"></i> ou augmente de (%)</label>
-                                                    <input name="exampleInputHighThreshold" type="number"
-                                                            class="form-control" placeholder="45"
-                                                            id="exampleInputHighThreshold"
+                                                    <label for="HighThresholdPercent"> <i class="feather icon-arrow-up"></i> diminue de (%)ou augmente de (%)</label>
+                                                    <input name="HighThresholdPercent" type="number"
+                                                            class="form-control" placeholder="40"
+                                                            id="HighThresholdPercent"
                                                             min="1" 
                                                             step="any"
-                                                            value="{{ request.form['exampleInputHighThreshold'] }}">
+                                                            value="{{ request.form['HighThresholdPercent'] }}">
                                                 </div>
                                                 <div class="form-group form-check"> 
-                                                    <input type="checkbox" class="form-check-input" id="snooze">
-                                                    <label class="form-check-label" for="exampleCheck1">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
+                                                    <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
+                                                    <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Créer l'alerte</button>
                                             </form>
