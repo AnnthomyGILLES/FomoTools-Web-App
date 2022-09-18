@@ -6,11 +6,22 @@ import pandas as pd
 from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_required, current_user
 from jinja2 import TemplateNotFound
+from loguru import logger
+from sqlalchemy.exc import StatementError
 
 from apps import db
-from apps.authentication.models import Crypto, Alert, User
+from apps.authentication.models import (
+    Crypto,
+    Alert,
+    User,
+    Notification,
+)
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.home import blueprint
+
+
+class NoInstanceFoundError(Exception):
+    pass
 
 
 @blueprint.route("/index")
@@ -35,7 +46,7 @@ def index():
             Alert.high_threshold,
         )
         .filter(
-            User.username == Crypto.users_name,
+            User.username == Crypto.username,
         )
         .filter(
             Crypto.symbol == Alert.symbol,
@@ -89,7 +100,7 @@ def route_template(template):
                     Crypto,
                     slug=slug,
                     symbol=symbol,
-                    users_name=current_user.username,
+                    username=current_user.username,
                 )
 
                 alert = get_or_create(
@@ -101,8 +112,16 @@ def route_template(template):
                     symbol=symbol,
                 )
 
+                notification = get_or_create(
+                    db.session,
+                    Notification,
+                    discord="1016780345712054322/ZLqpN63QakgG1mIdMCBdfdPvQN95fmwFhcWb-TkFe8a8ieJ6zMCikLUV5Cmb4IdOjgm1",
+                    alerts=alert,
+                )
+
                 db.session.add(crypto)
                 db.session.add(alert)
+                db.session.add(notification)
                 db.session.commit()
                 return redirect(url_for("home_blueprint.index"))
 
@@ -117,10 +136,13 @@ def route_template(template):
 
 
 def get_or_create(session, model, **kwargs):
-    instance = session.query(model).filter_by(**kwargs).first()
-    if instance:
+    try:
+        instance = session.query(model).filter_by(**kwargs).first()
+        if not instance:
+            raise NoInstanceFoundError
         return instance
-    else:
+    except (StatementError, NoInstanceFoundError):
+        logger.debug(f"No results found for query following query: {kwargs}")
         instance = model(**kwargs)
         return instance
 
