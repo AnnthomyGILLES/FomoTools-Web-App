@@ -7,30 +7,28 @@ from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 def detect_threshold(data):
     cmc = CryptoMarket()
     df = cmc.get_listings(convert="EUR")
-    df = df[["symbol", "quote.EUR.price"]].rename(
-        columns={"symbol": "Symbol", "quote.EUR.price": "Price"}
-    )
+    df = df[["symbol", "quote.EUR.price"]].rename(columns={"quote.EUR.price": "price"})
 
-    df_obs = pd.DataFrame(
-        data,
-        columns=["Symbol", "ReferencePrice", "LowThreshold", "HighThreshold", "User"],
+    # TODO Remove this for production
+    df_obs = data.copy()
+    df_obs["reference_price"] = df_obs["low_threshold"] - 100
+    data = df_obs.merge(df, on="symbol", how="left")
+
+    data["diminue"] = (data["low_threshold"] < data["reference_price"]) & (
+        data["low_threshold"] >= data["price"]
     )
-    data = df_obs.merge(df, on="Symbol", how="left")
-    data["decreasing"] = (data["LowThreshold"] < data["ReferencePrice"]) & (
-        data["LowThreshold"] >= data["Price"]
-    )
-    data["increasing"] = (data["HighThreshold"] > data["ReferencePrice"]) & (
-        data["HighThreshold"] <= data["Price"]
+    data["augmente"] = (data["high_threshold"] > data["reference_price"]) & (
+        data["high_threshold"] <= data["price"]
     )
     conditions = [
-        (data["decreasing"] == True) & (data["increasing"] == False),
-        (data["decreasing"] == False) & (data["increasing"] == True),
-        (data["decreasing"] == True) & (data["increasing"] == True),
-        (data["decreasing"] == False) & (data["increasing"] == False),
+        (data["diminue"] == True) & (data["augmente"] == False),
+        (data["diminue"] == False) & (data["augmente"] == True),
+        (data["diminue"] == True) & (data["augmente"] == True),
+        (data["diminue"] == False) & (data["augmente"] == False),
     ]
-    choices = ["decreasing", "increasing", "error", "drop"]
+    choices = ["diminue", "augmente", "error", "drop"]
     data["notification"] = np.select(conditions, choices)
-    data = data.drop(["decreasing", "increasing"], axis=1)
+    data = data.drop(["diminue", "augmente"], axis=1)
 
     df_user_notifications = data[data["notification"] != "drop"]
 
