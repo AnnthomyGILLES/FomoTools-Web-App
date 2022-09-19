@@ -92,7 +92,8 @@
                                                     <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
                                                     <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Créer l'alerte</button>
+                                                <button type="submit" class="btn btn-primary"><i class="feather icon-play-circle" id="price_submit"></i>Créer l'alerte</button>
+                                                <button type="reset" class="btn btn-secondary"><i class="feather icon-minus-circle" id="price_reset"></i>Remettre à zéro</button>
                                             </form>
                                         </div>
                                     </div>
@@ -101,7 +102,7 @@
                                             <form method="post">
                                                 <div class="form-group"> 
                                                     <label for="percent_notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
-                                                    <select multiple class="form-control" name="choices-multiple-remove-button" id="percent_notification_method" placeholder="This is a placeholder">
+                                                    <select multiple class="form-control" name="percent_notification_method" id="percent_notification_method" placeholder="Notification method">
                                                         <option value="mail"><i class="feather icon-mail"></i>Courriel</option>
                                                         <option value="discord">Discord</option>
                                                         <option value="browser">Navigateur</option>
@@ -112,8 +113,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group"> 
-                                                    <label for="crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
-                                                    <select class="form-control" id="crypto_selected" name="crypto_selected">
+                                                    <label for="percent_crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
+                                                    <select class="form-control choices__input" name="percent_crypto_selected" id="percent_crypto_selected" placeholder="Crypto selected">
                                                         {% for _, crypto in cryptos.items() %}
                                                         <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) - actuellement  XXX€</option>
                                                         {% endfor %}
@@ -124,24 +125,25 @@
                                                     <input name="LowThresholdPercent" type="number"
                                                             class="form-control" placeholder="20"
                                                             id="LowThresholdPercent"
-                                                            min="1" 
+                                                            min="0" 
                                                             step="any"
                                                             value="{{request.form['LowThresholdPercent'] }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="HighThresholdPercent"> <i class="feather icon-arrow-up"></i> diminue de (%)ou augmente de (%)</label>
+                                                    <label for="HighThresholdPercent"> <i class="feather icon-arrow-up"></i> ou augmente de (%)</label>
                                                     <input name="HighThresholdPercent" type="number"
                                                             class="form-control" placeholder="40"
                                                             id="HighThresholdPercent"
-                                                            min="1" 
+                                                            min="0" 
                                                             step="any"
-                                                            value="{{ request.form['HighThresholdPercent'] }}">
+                                                            value="{{request.form['HighThresholdPercent'] }}">
                                                 </div>
                                                 <div class="form-group form-check"> 
                                                     <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
                                                     <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a X fois tant que je ne la désactive pas</label>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Créer l'alerte</button>
+                                                <button type="submit" class="btn btn-primary"><i class="feather icon-play-circle" id="percent_submit"></i>Créer l'alerte</button>
+                                                <button type="reset" class="btn btn-secondary"><i class="feather icon-minus-circle" id="percent_reset"></i>Remettre à zéro</button>
                                             </form>
                                         </div>
                                     </div>

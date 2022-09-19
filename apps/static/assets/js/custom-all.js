@@ -8,8 +8,8 @@ const timestring = date.toLocaleTimeString();
 // Insert time in html
 //document.getElementById('timestring').innerHTML = timestring
 // Setup Choice-js for #price_notification_method 
-const percentNotificationMethodForm = $('#percent_notification_method')[0];
-const percentNotificationMethodChoice = new Choices(percentNotificationMethodForm, {
+let percentNotificationMethodForm = $('#percent_notification_method')[0];
+let percentNotificationMethodChoice = new Choices(percentNotificationMethodForm, {
     renderChoiceLimit: -1,
     maxItemCount: 2,
     removeItems: true,
@@ -28,4 +28,31 @@ const percentNotificationMethodChoice = new Choices(percentNotificationMethodFor
       return value1 === value2;
     }
   });
+// Setup Choice-js for #percent_crypto_selected 
+let percentCryptoSelectedForm = $('#percent_crypto_selected')[0];
+let percentCryptoSelectedChoice = new Choices(percentCryptoSelectedForm, {
+    renderChoiceLimit: 5,
+    maxItemCount: 1,
+    removeItems: true,
+    removeItemButton: true,
+    loadingText: 'Chargement...',
+    noResultsText: 'Aucun résultat trouvé',
+    noChoicesText: 'Aucun choix possible à partir de',
+    itemSelectText: 'Cliquez pour sélectionner',
+    addItemText: (value) => {
+      return `Appuyez sur entrée pour ajouter <b>"${value}"</b>`;
+    },
+    maxItemText: (maxItemCount) => {
+      return `Vous pouvez choisir ${maxItemCount} options maximum`;
+    },
+    valueComparer: (value1, value2) => {
+      return value1 === value2;
+    }
+  });
 }
+// // On invalid elements for all forms
+// addEventListener('invalid', (event) => {});
+
+// oninvalid = (event) => { 
+//   $('.form-control').attr('class', '.form-control is-invalid');
+// };
