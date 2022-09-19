@@ -42,13 +42,48 @@ def send_notification(data):
 
 
 if __name__ == "__main__":
-    data = [
-        ["BTC", 19870, 19860, 19875, "blackperl"],
-        ["ETH", 1700, 1600, 1775, "blackperl"],
-        ["ETH", 1574.6, np.nan, 1574.7, "gotama"],
-        ["ETH", 1700, 1602, np.nan, "gotama"],
-    ]
-    df_user_notifications = detect_threshold(data)
+    # data = [
+    #     ["BTC", 19870, 19860, 19875, "blackperl"],
+    #     ["ETH", 1700, 1600, 1775, "blackperl"],
+    #     ["ETH", 1574.6, np.nan, 1574.7, "gotama"],
+    #     ["ETH", 1700, 1602, np.nan, "gotama"],
+    # ]
+
+    # WARNING: Don't run with debug turned on in production!
+    DEBUG = "True"
+
+    # The configuration
+    get_config_mode = "Debug" if DEBUG else "Production"
+
+    try:
+
+        # Load the configuration using the default values
+        app_config = config_dict[get_config_mode.capitalize()]
+
+    except KeyError:
+        exit("Error: Invalid <config_mode>. Expected values [Debug, Production] ")
+
+    app = create_app(app_config)
+    Migrate(app, db)
+
+    with app.app_context():
+        # TODO: Correct cartesian product offollowing query
+        data = pd.read_sql(
+            sql=db.session.query(
+                User.username,
+                Crypto.slug,
+                Crypto.symbol,
+                Alert.low_threshold,
+                Alert.high_threshold,
+                Notification.discord,
+            )
+            .distinct()
+            .statement,
+            con=db.session.bind,
+        )
+
+        df_user_notifications = detect_threshold(data)
+        send_notification(df_user_notifications)
 
 #
 #     'apprise -vv -t "Test Message Title" -b "Test Message Body" \
