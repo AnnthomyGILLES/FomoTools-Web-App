@@ -1,7 +1,12 @@
 import numpy as np
 import pandas as pd
+from flask_migrate import Migrate
 
+from apps import db, create_app
+from apps.authentication.models import User, Alert, Crypto, Notification
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
+from apps.config import config_dict
+from apps.notifications.notification_manager import Notifier
 
 
 def detect_threshold(data):
