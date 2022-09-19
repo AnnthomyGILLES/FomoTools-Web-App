@@ -38,7 +38,33 @@ def detect_threshold(data):
 
 
 def send_notification(data):
-    pass
+    for index, row in data.iterrows():
+        row = row.to_dict()
+        discord_api_key = row.get("discord")
+        username = row.get("username")
+        slug = row.get("slug")
+        low_threshold = row.get("low_threshold")
+        high_threshold = row.get("high_threshold")
+        reference_price = row.get("reference_price")
+        price = row.get("price")
+        notification = row.get("notification")
+        symbol = row.get("symbol")
+        webhook_id, webhook_token = discord_api_key.split("/")
+        body = None
+        if notification == "diminue":
+            body = f"Le prix de {slug} ({symbol}) a dépassé votre seuil {low_threshold} et a atteint: {price}."
+        elif notification == "augmente":
+            body = f"Le prix de {slug} ({symbol})  a dépassé votre seuil {high_threshold} et a atteint: {price}."
+        hook = {
+            "webhook_id": webhook_id,
+            "webhook_token": webhook_token,
+        }
+        message = {
+            "title": "Votre seuil a été atteint!",
+            "body": body,
+        }
+        notifier = Notifier.to_discord(**hook)
+        notifier.notify(**message)
 
 
 if __name__ == "__main__":
