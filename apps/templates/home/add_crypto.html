@@ -44,13 +44,13 @@
                                     </li>
                                     <li class="nav-item"> <a class="nav-link text-uppercase" id="percentage-tab" data-toggle="tab" href="#percentage"
                                         role="tab" aria-controls="percentage" aria-selected="false">Pourcentage</a> 
-                                    </li>   
+                                    </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane active" id="price" role="tabpanel" aria-labelledby="price-tab">
                                         <div class="col-md-6">
                                             <form method="post">
-                                                <div class="form-group"> 
+                                                <div class="form-group">
                                                     <label for="price_notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
                                                     <select multiple class="form-control" name="price_notification_method" id="price_notification_method">
                                                         <option value="" disabled hidden></option>
@@ -63,7 +63,7 @@
                                                         <option value="whatsapp">Whatsapp</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group"> 
+                                                <div class="form-group">
                                                     <label for="price_crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
                                                     <select class="form-control choices__input" name="price_crypto_selected" id="price_crypto_selected">
                                                         <option value="Cette cryptommonaie (tapez pour rechercher)" selected disabled hidden></option>
@@ -77,7 +77,7 @@
                                                     <input name="percent_high_threshold" type="number"
                                                             class="form-control"
                                                             id="percent_high_threshold"
-                                                            min="0" 
+                                                            min="0"
                                                             step="any"
                                                             placeholder="0"
                                                             value="{{request.form['percent_high_threshold'] }}">
@@ -87,12 +87,12 @@
                                                     <input name="price_high_threshold" type="number"
                                                             class="form-control"
                                                             id="price_high_threshold"
-                                                            min="0" 
+                                                            min="0"
                                                             step="any"
-                                                            placeholder="0" 
+                                                            placeholder="0"
                                                             value="{{request.form['price_high_threshold'] }}">
                                                 </div>
-                                                <div class="form-group form-check"> 
+                                                <div class="form-group form-check">
                                                     <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
                                                     <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a 3 fois avant désactivation automatique</label>
                                                 </div>
@@ -104,7 +104,7 @@
                                     <div class="tab-pane fade" id="percentage" role="tabpanel" aria-labelledby="percentage-tab">
                                         <div class="col-md-6">
                                             <form method="post" name="alert_percent_tab">
-                                                <div class="form-group"> 
+                                                <div class="form-group">
                                                     <label for="percent_notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
                                                     <select multiple class="form-control" name="percent_notification_method" id="percent_notification_method">
                                                         <option value="" disabled hidden></option>
@@ -117,7 +117,7 @@
                                                         <option value="whatsapp">Whatsapp</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group" name="alert_price_tab"> 
+                                                <div class="form-group" name="alert_price_tab">
                                                     <label for="percent_crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
                                                     <select class="form-control choices__input" name="percent_crypto_selected" id="percent_crypto_selected">
                                                         <option value="Cette cryptommonaie (tapez pour rechercher)" selected disabled hidden></option>
@@ -131,7 +131,7 @@
                                                     <input name="percent_low_threshold" type="number"
                                                             class="form-control"
                                                             id="percent_low_threshold"
-                                                            min="0" 
+                                                            min="0"
                                                             step="any"
                                                             placeholder="0"
                                                             value="{{request.form['percent_low_threshold'] }}">
@@ -141,12 +141,12 @@
                                                     <input name="percent_high_threshold" type="number"
                                                             class="form-control"
                                                             id="percent_high_threshold"
-                                                            min="0" 
+                                                            min="0"
                                                             step="any"
-                                                            placeholder="0" 
+                                                            placeholder="0"
                                                             value="{{request.form['percent_high_threshold'] }}">
                                                 </div>
-                                                <div class="form-group form-check"> 
+                                                <div class="form-group form-check">
                                                     <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
                                                     <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a 3 fois avant désactivation automatique</label>
                                                 </div>

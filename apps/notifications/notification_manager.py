@@ -36,7 +36,6 @@ class Notifier(object):
 
 
 if __name__ == "__main__":
-    # notifier = Notifier()
 
     # discord_params = {
     #     "webhook_id": "1016780345712054322",
@@ -44,7 +43,7 @@ if __name__ == "__main__":
     #     "title": "Gotama is a damn genius",
     #     "body": "Yes you are baby!",
     # }
-    # notifier.notify_discord(**discord_params)
+    # notifier = Notifier.to_discord(**discord_params)
     #
     # slack_params = {
     #     "token_a": "T4B9F46TA",
@@ -54,6 +53,6 @@ if __name__ == "__main__":
     #     "title": "Gotama is a damn genius",
     #     "body": "Yes you are baby!",
     # }
-    # notifier.notify_slack(**slack_params)
+    # notifier = Notifier.to_slack(**slack_params)
     notifier = Notifier.to_telegram("5533435857:AAHSLl36GXUtPUNpGQbYtkYs8Y_yx_g7mzE")
     notifier.notify(title="Gotama is a damn genius", body="Yes you are baby!")
