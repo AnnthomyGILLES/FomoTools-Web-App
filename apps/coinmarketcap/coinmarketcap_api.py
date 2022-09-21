@@ -38,7 +38,7 @@ class CryptoMarket(object):
         cache_filename = "coinmarketcap_cache"
         self.cache_file_path = Path(tempfile.gettempdir(), cache_filename)
         self.session = requests_cache.CachedSession(
-            cache_name=str(self.cache_file_path), backend="sqlite", expire_after=864000
+            cache_name=str(self.cache_file_path), backend="sqlite", expire_after=1800
         )
         self.session.headers.update(self.HEADERS)
 
