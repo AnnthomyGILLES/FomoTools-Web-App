@@ -2,6 +2,7 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+from datetime import datetime
 
 from flask_login import UserMixin
 
@@ -26,6 +27,7 @@ class Alert(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     low_threshold = db.Column(db.Integer, nullable=True)
     high_threshold = db.Column(db.Integer, nullable=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     symbol = db.Column(db.String(64), db.ForeignKey("cryptos.symbol"))
     user_id = db.Column(db.String(64), db.ForeignKey("users.id"))
     notification_id = db.relationship("Notification", backref="alerts")
