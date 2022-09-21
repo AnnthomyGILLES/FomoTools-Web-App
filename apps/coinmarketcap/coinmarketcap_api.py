@@ -87,4 +87,4 @@ if __name__ == "__main__":
     # df = cmc.get_listings()
     # print(df.head())
 
-    # print(cmc.get_cryptos_names().name.to_string(index=False))
+    cmc.get_cryptos_names()
