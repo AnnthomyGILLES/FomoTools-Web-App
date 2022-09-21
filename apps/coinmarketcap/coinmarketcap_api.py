@@ -72,6 +72,7 @@ class CryptoMarket(object):
 
     def get_cryptos_names(self, **params: Union[dict, object]):
         """See also https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap"""
+        # TODO: Ordonner par Market cap
         url = self.ENDPOINTS["map"]
         response = self.get(url, **params)
         df = pd.json_normalize(response["data"])
