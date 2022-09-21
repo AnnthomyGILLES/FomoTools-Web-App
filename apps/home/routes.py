@@ -81,11 +81,13 @@ def route_template(template):
         segment = get_segment(request)
 
         if request.method == "POST":
-            slug = request.form["exampleInputEmail1"]
-            symbol = request.form["exampleInputSymbol"]
+            price_notification_method = request.form["price_notification_method"]
+            slug = request.form["price_crypto_selected"]
+            # TODO Ajouter un symbole
+            symbol = "test_symbol"
 
-            low_threshold = request.form["exampleInputLowThreshold"]
-            high_threshold = request.form["exampleInputHighThreshold"]
+            low_threshold = request.form["price_low_threshold"]
+            high_threshold = request.form["price_high_threshold"]
 
             if not slug:
                 flash("Slug is required!")
