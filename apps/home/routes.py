@@ -91,9 +91,9 @@ def route_template(template):
         if request.method == "POST":
             price_notification_method = request.form["price_notification_method"]
             slug = request.form["price_crypto_selected"]
-            # TODO Ajouter un symbole
-            symbol = "test_symbol"
-
+            cmc_id, symbol, price_eur = df_cryptos[df_cryptos["slug"] == slug][
+                ["id", "symbol", "price_eur"]
+            ].values.tolist()[0]
             low_threshold = request.form["price_low_threshold"]
             high_threshold = request.form["price_high_threshold"]
 
@@ -111,6 +111,7 @@ def route_template(template):
                     slug=slug,
                     symbol=symbol,
                     username=current_user.username,
+                    cmc_id=cmc_id,
                 )
 
                 alert = get_or_create(
@@ -120,6 +121,7 @@ def route_template(template):
                     high_threshold=high_threshold,
                     user_id=user_id,
                     symbol=symbol,
+                    reference_price=price_eur,
                 )
 
                 notification = get_or_create(
