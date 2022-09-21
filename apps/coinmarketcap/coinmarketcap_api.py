@@ -85,7 +85,10 @@ if __name__ == "__main__":
     # info = cmc.get_quotes(**parameters)
     # pprint.pprint(info)
     #
-    # df = cmc.get_listings()
-    # print(df.head())
+    df = cmc.get_listings(convert="EUR")
+    df = df[["symbol", "slug", "quote.EUR.price"]].rename(
+        columns={"quote.EUR.price": "price_eur"}
+    )
+    print(df.head())
 
-    cmc.get_cryptos_names()
+    # cmc.get_cryptos_names()
