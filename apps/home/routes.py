@@ -74,6 +74,10 @@ def index():
 def route_template(template):
     try:
 
+        cmc = CryptoMarket()
+
+        df = cmc.get_cryptos_names()
+
         if not template.endswith(".html"):
             template += ".html"
 
@@ -127,8 +131,12 @@ def route_template(template):
                 db.session.commit()
                 return redirect(url_for("home_blueprint.index"))
 
+        # asset_name = cmc.get_cryptos_names().name.to_string(index=False)
+        # asset_symbol = cmc.get_cryptos_names().name.to_string(index=False)
+        cryptos = cmc.get_cryptos_names().to_dict(orient="index")
+
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment)
+        return render_template("home/" + template, segment=segment, cryptos=cryptos)
 
     except TemplateNotFound:
         return render_template("home/page-404.html"), 404

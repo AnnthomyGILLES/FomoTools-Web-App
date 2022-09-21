@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} UI Forms {% endblock %}
+{% block title %} Mes alertes {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -19,12 +19,12 @@
                         <div class="row align-items-center">
                             <div class="col-md-12">
                                 <div class="page-header-title">
-                                    <h5 class="m-b-10">Form Elements</h5>
+                                    <h5 class="m-b-10">Mes alertes</h5>
                                 </div>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Mes outils premiums</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Gérer mes alertes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -36,55 +36,94 @@
                         <!-- [ Main Content ] start -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5>Basic Componant</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5>Form controls</h5>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Slug</label>
-                                                        <input name="exampleInputEmail1" type="text"
-                                                               class="form-control" id="exampleInputEmail1"
-                                                               aria-describedby="emailHelp" placeholder="Enter email"
-                                                               value="{{ request.form['exampleInputEmail1'] }}">
-                                                        <small id="emailHelp" class="form-text text-muted">We'll never
-                                                            share your email with anyone else.</small>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputSymbol">Symbol</label>
-                                                        <input name="exampleInputSymbol" type="text"
-                                                               class="form-control" placeholder="Text"
-                                                               id="exampleInputSymbol"
-                                                               value="{{ request.form['exampleInputSymbol'] }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputLowThreshold">Low Threshold</label>
-                                                        <input name="exampleInputLowThreshold" type="text"
-                                                               class="form-control" placeholder="Text"
-                                                               id="exampleInputLowThreshold"
-                                                               value="{{ request.form['exampleInputLowThreshold'] }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputHighThreshold">High Threshold</label>
-                                                        <input name="exampleInputHighThreshold" type="text"
-                                                               class="form-control" placeholder="Text"
-                                                               id="exampleInputHighThreshold"
-                                                               value="{{ request.form['exampleInputHighThreshold'] }}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <h5>Créer une alerte</h5>
+                                <hr>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item"> <a class="nav-link text-uppercase active show" id="price-tab" data-toggle="tab"
+                                        href="#price" role="tab" aria-controls="price" aria-selected="true">Prix</a>
+                                    </li>
+                                    <li class="nav-item"> <a class="nav-link text-uppercase" id="percentage-tab" data-toggle="tab" href="#percentage"
+                                        role="tab" aria-controls="percentage" aria-selected="false">Pourcentage</a> 
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <!-- Price tab form START -->
+                                    {% include 'includes/form_add_crypto_price.html' %}
+                                    <!-- Price tab form END -->
+                                    <!-- Percent tab form START -->
+                                    {% include 'includes/form_add_crypto_percent.html' %}
+                                    <!-- Percent tab form END -->
                                 </div>
                             </div>
+                            </div>
                         </div>
-                        <!-- [ Main Content ] end -->
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Mes alertes</h5>
+                                <hr>
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Crypto</th>
+                                                        <th>Symbol</th>
+                                                        <th>Activated since</th>
+                                                        <th>Price when activated</th>
+                                                        <th>Current price (variation)</th>
+                                                        <th>Alert me if price below</th>
+                                                        <th>Alert me if price above</th>
+                                                        <th>Via</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Bictoin</td>
+                                                        <td>BTC</td>
+                                                        <td>15/09/2022 - 15:00 (UTC+2)</td>
+                                                        <td>15522.32€</td>
+                                                        <td>17489.32€ (+x%)</td>
+                                                        <td>14000€ (-x%)</td>
+                                                        <td>18000€ (+x%)</td>
+                                                        <td>Whatsapp, Discord</td>
+                                                        <td>Cancel / Update </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Litecoin</td>
+                                                        <td>LTC</td>
+                                                        <td>17/09/2022 - 15:00 (UTC+2)</td>
+                                                        <td>15522.32€</td>
+                                                        <td>17489.32€ (+x%)</td>
+                                                        <td>14000€ (-x%)</td>
+                                                        <td>18000€ (+x%)</td>
+                                                        <td>Whatsapp, Discord</td>
+                                                        <td>Cancel / Update </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Litecoin</td>
+                                                        <td>LTC</td>
+                                                        <td>17/09/2022 - 15:00 (UTC+2)</td>
+                                                        <td>15522.32€</td>
+                                                        <td>17489.32€ (+x%)</td>
+                                                        <td>14000€ (-x%)</td>
+                                                        <td>18000€ (+x%)</td>
+                                                        <td>Whatsapp, Discord</td>
+                                                        <td>Cancel / Update </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
                     </div>
                 </div>
             </div>
