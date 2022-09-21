@@ -16,7 +16,7 @@ class Crypto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     slug = db.Column(db.String(64), unique=True)
     symbol = db.Column(db.String(64), unique=True)
-    # cmc_id = db.Column(db.Integer, unique=True)
+    cmc_id = db.Column(db.Integer, unique=True)
     username = db.Column(db.String(64), db.ForeignKey("users.username"))
     crypto_id = db.relationship("Alert", backref="cryptos")
 
@@ -27,6 +27,7 @@ class Alert(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     low_threshold = db.Column(db.Integer, nullable=True)
     high_threshold = db.Column(db.Integer, nullable=True)
+    reference_price = db.Column(db.Float, nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     symbol = db.Column(db.String(64), db.ForeignKey("cryptos.symbol"))
     user_id = db.Column(db.String(64), db.ForeignKey("users.id"))
