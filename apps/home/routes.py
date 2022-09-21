@@ -40,10 +40,13 @@ def index():
     df = pd.read_sql(
         sql=db.session.query(
             User.username,
+            Crypto.cmc_id,
             Crypto.slug,
             Crypto.symbol,
             Alert.low_threshold,
             Alert.high_threshold,
+            Alert.reference_price,
+            Alert.date_created,
         )
         .filter(
             User.username == Crypto.username,
