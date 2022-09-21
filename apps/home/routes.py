@@ -78,6 +78,10 @@ def route_template(template):
     try:
 
         cmc = CryptoMarket()
+        df_cryptos = cmc.get_listings(convert="EUR")
+        df_cryptos = df_cryptos[["id", "symbol", "slug", "quote.EUR.price"]].rename(
+            columns={"quote.EUR.price": "price_eur"}
+        )
         if not template.endswith(".html"):
             template += ".html"
 
@@ -131,12 +135,8 @@ def route_template(template):
                 db.session.commit()
                 return redirect(url_for("home_blueprint.index"))
 
-        cryptos = cmc.get_listings(convert="EUR")
-        cryptos = (
-            cryptos[["symbol", "slug", "quote.EUR.price"]]
-            .rename(columns={"quote.EUR.price": "price_eur"})
-            .to_dict(orient="index")
-        )
+        cryptos = df_cryptos.to_dict(orient="index")
+
         # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template("home/" + template, segment=segment, cryptos=cryptos)
 
