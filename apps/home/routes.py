@@ -52,7 +52,7 @@ def index():
             User.username == Crypto.username,
         )
         .filter(
-            Crypto.symbol == Alert.symbol,
+            Crypto.cmc_id == Alert.cmc_id,
         )
         .filter(
             User.username == username,
