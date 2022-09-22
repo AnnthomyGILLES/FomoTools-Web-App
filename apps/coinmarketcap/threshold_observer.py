@@ -101,16 +101,21 @@ if __name__ == "__main__":
     with app.app_context():
         # TODO: Correct cartesian product offollowing query
         data = pd.read_sql(
-            sql=db.session.query(
-                User.username,
-                Crypto.slug,
-                Crypto.symbol,
-                Alert.low_threshold,
-                Alert.high_threshold,
-                Notification.discord,
-            )
-            .distinct()
-            .statement,
+            sql=(
+                db.session.query(
+                    User.username,
+                    Crypto.slug,
+                    Crypto.symbol,
+                    Alert.low_threshold,
+                    Alert.high_threshold,
+                    Alert.reference_price,
+                    Alert.cmc_id,
+                    Notification.discord,
+                )
+                .join(Crypto, Crypto.username == User.username)
+                .join(Alert, Alert.cmc_id == Crypto.cmc_id)
+                .join(Notification)
+            ).statement,
             con=db.session.bind,
         )
 
