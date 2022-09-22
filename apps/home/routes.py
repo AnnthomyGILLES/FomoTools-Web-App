@@ -120,7 +120,7 @@ def route_template(template):
                     low_threshold=low_threshold,
                     high_threshold=high_threshold,
                     user_id=user_id,
-                    symbol=symbol,
+                    cmc_id=cmc_id,
                     reference_price=price_eur,
                 )
 
