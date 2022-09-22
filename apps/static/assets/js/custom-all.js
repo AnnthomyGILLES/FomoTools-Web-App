@@ -6,8 +6,9 @@ const datestring = date.toDateString();
 const timestring = date.toLocaleTimeString();
 // Insert time in html
 //document.getElementById('timestring').innerHTML = timestring
+//Init ChoiceJS after dom is ready. We used VanillaJS and dont used document.ready to fire this code ASAP
+document.addEventListener("DOMContentLoaded", function(event) { 
 // Setup Choice-js for #percent_notification_method 
-window.onload = function() {
 let percentNotificationMethodForm = $('#percent_notification_method')[0];
 let percentNotificationMethodChoice = new Choices(percentNotificationMethodForm, {
     renderChoiceLimit: -1,
@@ -91,7 +92,7 @@ let priceCryptoSelectedChoice = new Choices(priceCryptoSelectedForm, {
       return value1 === value2;
     }
   });
-}
+})
 // // On invalid elements for all forms
 // addEventListener('invalid', (event) => {});
 
