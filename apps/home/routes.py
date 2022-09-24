@@ -55,6 +55,9 @@ def index():
             .join(Crypto, Crypto.username == User.username)
             .join(Alert, Alert.cmc_id == Crypto.cmc_id)
             .join(Notification)
+            .filter(
+                User.username == username,
+            )
         ).statement,
         con=db.session.bind,
     )
