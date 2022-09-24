@@ -11,8 +11,11 @@ from apps.notifications.notification_manager import Notifier
 
 def detect_threshold(data):
     cmc = CryptoMarket()
-    df = cmc.get_listings(convert="EUR")
-    df = df[["symbol", "quote.EUR.price"]].rename(columns={"quote.EUR.price": "price"})
+    list_of_ids = data["cmc_id"].astype(str).tolist()
+    list_of_ids = ",".join(list_of_ids)
+    df = cmc.get_quotes(convert="EUR", id=list_of_ids)
+    df = df[["name", "slug", "EUR.price", "symbol"]]
+    df = df[["symbol", "EUR.price"]].rename(columns={"EUR.price": "price"})
 
     # TODO Remove this for production
     df_obs = data.copy()
@@ -98,16 +101,21 @@ if __name__ == "__main__":
     with app.app_context():
         # TODO: Correct cartesian product offollowing query
         data = pd.read_sql(
-            sql=db.session.query(
-                User.username,
-                Crypto.slug,
-                Crypto.symbol,
-                Alert.low_threshold,
-                Alert.high_threshold,
-                Notification.discord,
-            )
-            .distinct()
-            .statement,
+            sql=(
+                db.session.query(
+                    User.username,
+                    Crypto.slug,
+                    Crypto.symbol,
+                    Alert.low_threshold,
+                    Alert.high_threshold,
+                    Alert.reference_price,
+                    Alert.cmc_id,
+                    Notification.discord,
+                )
+                .join(Crypto, Crypto.username == User.username)
+                .join(Alert, Alert.cmc_id == Crypto.cmc_id)
+                .join(Notification)
+            ).statement,
             con=db.session.bind,
         )
 

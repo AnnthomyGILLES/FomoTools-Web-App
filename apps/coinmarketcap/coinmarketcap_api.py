@@ -60,8 +60,11 @@ class CryptoMarket(object):
         """See also: https://coinmarketcap.com/api/documentation/v1/#operation/getV2CryptocurrencyQuotesLatest"""
         url = self.ENDPOINTS["quotes"]
         response = self.get(url, **params)
-        df = pd.json_normalize(response["data"])
-        return df
+        df = pd.DataFrame(response["data"]).T
+        df_price_details = pd.json_normalize(df["quote"]).reset_index(drop=True)
+        df = df.drop(["quote"], axis=1).reset_index(drop=True)
+        data = pd.concat([df, df_price_details], axis=1)
+        return data
 
     def get_listings(self, **params: Union[dict, object]) -> pd.DataFrame:
         """See also: https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsLatest"""
