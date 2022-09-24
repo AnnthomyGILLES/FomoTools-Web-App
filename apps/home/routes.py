@@ -138,9 +138,10 @@ def route_template(template):
                 return redirect(url_for("home_blueprint.index"))
 
         cryptos = df_cryptos.to_dict(orient="index")
+        cryptos_for_json= df_cryptos.to_dict(orient="records")
 
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment, cryptos=cryptos)
+        return render_template("home/" + template, segment=segment, cryptos=cryptos, cryptos_for_json=cryptos_for_json)
 
     except TemplateNotFound:
         return render_template("home/page-404.html"), 404

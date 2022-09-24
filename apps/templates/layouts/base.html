@@ -14,12 +14,10 @@
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description"
-          content="Make FOMO great again"/>
-    <meta name="keywords"
-          content="crypto, porfolio, management, alerts, assets, marketcap"/>
-    <meta name="author" content="CodedThemes"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Make FOMO great again" />
+    <meta name="keywords" content="crypto, porfolio, management, alerts, assets, marketcap" />
+    <meta name="author" content="CodedThemes" />
 
     <!-- Favicon icon -->
     <link rel="icon" href="{{ config.ASSETS_ROOT }}/images/favicon.ico" type="image/x-icon">
@@ -34,15 +32,25 @@
     <!-- Choices-js base CSS (optional) -->
     <!-- <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/base.min.css"> -->
     <!-- Choices-js CSS -->
-    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/choices.min.css">
-    <!-- Custom CSS all -->
-    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/custom-all.css">
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/custom/choices.min.css">
+    <!-- Custom CSS wide for whole website -->
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/custom/custom-all.css">
+    <!-- Fomantic UI main styles-->
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/datatables/semantic.min.css">
+
+    <!--DataTables css-->
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/datatables/select.dataTables.min.css">
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/datatables/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/datatables/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/datatables/fomotools.effects.datatables.css">
 
 
     <!-- Specific CSS goes HERE -->
-    {% block stylesheets %}{% endblock stylesheets %}
+    {% block stylesheets %}
+    {% endblock stylesheets %}
 
 </head>
+
 <body>
 
     <!-- [ Pre-loader ] start -->
@@ -66,4 +74,5 @@
     {% block javascripts %}{% endblock javascripts %}
 
 </body>
+
 </html>

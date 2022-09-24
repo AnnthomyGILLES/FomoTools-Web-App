@@ -10,21 +10,20 @@
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
-
         <div class="pcoded-content">
             <div class="pcoded-inner-content">
                 <!-- [ breadcrumb ] start -->
-                <div class="page-header">
+                <div class="page-header-title">
                     <div class="page-block">
                         <div class="row align-items-center">
                             <div class="col-md-12">
                                 <div class="page-header-title">
-                                    <h5 class="m-b-10">Mes alertes</h5>
+                                    <h1 class="m-b-10">Alertes</h5>
                                 </div>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="javascript:">Mes outils premiums</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">Gérer mes alertes</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Alertes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -34,16 +33,19 @@
                 <div class="main-body">
                     <div class="page-wrapper">
                         <!-- [ Main Content ] start -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h5>Créer une alerte</h5>
-                                <hr>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Créer une alerte</h5> <small>Paramétrez de nouvelles alertes</small>
+                                </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item"> <a class="nav-link text-uppercase active show" id="price-tab" data-toggle="tab"
-                                        href="#price" role="tab" aria-controls="price" aria-selected="true">Prix</a>
+                                    <li class="nav-item"> <a class="nav-link text-uppercase active show" id="price-tab"
+                                            data-toggle="tab" href="#price" role="tab" aria-controls="price"
+                                            aria-selected="true">Prix</a>
                                     </li>
-                                    <li class="nav-item"> <a class="nav-link text-uppercase" id="percentage-tab" data-toggle="tab" href="#percentage"
-                                        role="tab" aria-controls="percentage" aria-selected="false">Pourcentage</a> 
+                                    <li class="nav-item"> <a class="nav-link text-uppercase" id="percentage-tab"
+                                            data-toggle="tab" href="#percentage" role="tab" aria-controls="percentage"
+                                            aria-selected="false">Pourcentage</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
@@ -55,85 +57,62 @@
                                     <!-- Percent tab form END -->
                                 </div>
                             </div>
+                        </div>
+                        <br>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Gérer mes alertes</h5> <small>Analysez et réalisez des actions sur vos alertes
+                                        actives
+                                        ici</small>
+                                </div>
+                                <br />
+                                <div class="card-body">
+                                    <table id="table_id"
+                                        class="ui selectable striped celled blue padded table center aligned">
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h5>Mes alertes</h5>
-                                <hr>
-                                    <div class="card-block table-border-style">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Crypto</th>
-                                                        <th>Symbol</th>
-                                                        <th>Activated since</th>
-                                                        <th>Price when activated</th>
-                                                        <th>Current price (variation)</th>
-                                                        <th>Alert me if price below</th>
-                                                        <th>Alert me if price above</th>
-                                                        <th>Via</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Bictoin</td>
-                                                        <td>BTC</td>
-                                                        <td>15/09/2022 - 15:00 (UTC+2)</td>
-                                                        <td>15522.32€</td>
-                                                        <td>17489.32€ (+x%)</td>
-                                                        <td>14000€ (-x%)</td>
-                                                        <td>18000€ (+x%)</td>
-                                                        <td>Whatsapp, Discord</td>
-                                                        <td>Cancel / Update </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Litecoin</td>
-                                                        <td>LTC</td>
-                                                        <td>17/09/2022 - 15:00 (UTC+2)</td>
-                                                        <td>15522.32€</td>
-                                                        <td>17489.32€ (+x%)</td>
-                                                        <td>14000€ (-x%)</td>
-                                                        <td>18000€ (+x%)</td>
-                                                        <td>Whatsapp, Discord</td>
-                                                        <td>Cancel / Update </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Litecoin</td>
-                                                        <td>LTC</td>
-                                                        <td>17/09/2022 - 15:00 (UTC+2)</td>
-                                                        <td>15522.32€</td>
-                                                        <td>17489.32€ (+x%)</td>
-                                                        <td>14000€ (-x%)</td>
-                                                        <td>18000€ (+x%)</td>
-                                                        <td>Whatsapp, Discord</td>
-                                                        <td>Cancel / Update </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- [ Main Content ] end -->
                     </div>
                 </div>
             </div>
         </div>
-
+        <!-- [ Main Content ] end -->
     </div>
 </div>
+
 <!-- [ Main Content ] end -->
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<!-- Global custom JS functions and objects -->
+<!-- <script src="{{ config.ASSETS_ROOT }}/js/custom/jquery.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
+<!-- <script src="{{ config.ASSETS_ROOT }}/js/custom/jquery-1.12.4.js"></script> -->
+<script src="{{ config.ASSETS_ROOT }}/js/custom/custom-all.js"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/custom/choices.min.js"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/custom/pdfmake.min.js"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/custom/vfs_fonts.js"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/custom/semantic.min.js"></script>
+<!-- ////////  Custom JavaScript  END ////////  -->
+<!-- ////////  Custom DATABABLES JavaScript  START ////////  -->
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/fomotools.datatables.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.buttons.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.html5.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.print.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.colVis.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.semanticui.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.colReorder.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.select.min.js" defer></script>
+<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.semanticui.min.js" defer></script>
+<!-- ////////  Custom DATABABLES JavaScript  END  ////////  -->
+<script>
+    const datas = {{ cryptos_for_json|tojson }}
+</script>
+{% endblock javascripts %}
