@@ -10,20 +10,21 @@
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
+
         <div class="pcoded-content">
             <div class="pcoded-inner-content">
                 <!-- [ breadcrumb ] start -->
-                <div class="page-header-title">
+                <div class="page-header">
                     <div class="page-block">
                         <div class="row align-items-center">
                             <div class="col-md-12">
                                 <div class="page-header-title">
-                                    <h1 class="m-b-10">Alertes</h5>
+                                    <h5 class="m-b-10">Mes alertes</h5>
                                 </div>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="javascript:">Mes outils premiums</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">Alertes</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Gérer mes alertes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -33,11 +34,10 @@
                 <div class="main-body">
                     <div class="page-wrapper">
                         <!-- [ Main Content ] start -->
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Créer une alerte</h5> <small>Paramétrez de nouvelles alertes</small>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Créer une alerte</h5>
+                                <hr>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item"> <a class="nav-link text-uppercase active show" id="price-tab"
                                             data-toggle="tab" href="#price" role="tab" aria-controls="price"
@@ -58,61 +58,16 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Gérer mes alertes</h5> <small>Analysez et réalisez des actions sur vos alertes
-                                        actives
-                                        ici</small>
-                                </div>
-                                <br />
-                                <div class="card-body">
-                                    <table id="table_id"
-                                        class="ui selectable striped celled blue padded table center aligned">
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
+                <!-- [ Main Content ] end -->
             </div>
         </div>
-        <!-- [ Main Content ] end -->
     </div>
 </div>
-
 <!-- [ Main Content ] end -->
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
-<!-- Global custom JS functions and objects -->
-<!-- <script src="{{ config.ASSETS_ROOT }}/js/custom/jquery.min.js"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
-<!-- <script src="{{ config.ASSETS_ROOT }}/js/custom/jquery-1.12.4.js"></script> -->
-<script src="{{ config.ASSETS_ROOT }}/js/custom/custom-all.js"></script>
-<script src="{{ config.ASSETS_ROOT }}/js/custom/choices.min.js"></script>
-<script src="{{ config.ASSETS_ROOT }}/js/custom/pdfmake.min.js"></script>
-<script src="{{ config.ASSETS_ROOT }}/js/custom/vfs_fonts.js"></script>
-<script src="{{ config.ASSETS_ROOT }}/js/custom/semantic.min.js"></script>
-<!-- ////////  Custom JavaScript  END ////////  -->
-<!-- ////////  Custom DATABABLES JavaScript  START ////////  -->
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/fomotools.datatables.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/jquery.dataTables.min.js"></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.buttons.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.html5.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.print.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.colVis.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/buttons.semanticui.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.colReorder.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.select.min.js" defer></script>
-<script src="{{ config.ASSETS_ROOT }}/js/datatables/dataTables.semanticui.min.js" defer></script>
-<!-- ////////  Custom DATABABLES JavaScript  END  ////////  -->
-<script>
-    const datas = {{ cryptos_for_json|tojson }}
-</script>
-{% endblock javascripts %}
+{% block javascripts %}{% endblock javascripts %}

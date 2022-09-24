@@ -65,19 +65,10 @@ $(document).ready(function () {
                 [
                     { data: 'slug', "title": "Nom" },
                     { data: 'symbol', "title": "Symbole" },
-                    { data: 'price_eur', "title": "Prix" },
-                    { data: 'Reads.FASTQC_pair1', "title": "Alerte (seuil bas)" },
-                    { data: 'Reads.FASTQC_pair2', "title": "Alerte (seuil haut)" },
-                    { data: 'Reads.FASTQ_pair1', "title": "Alerte crée le" },
-                    { data: 'Reads.FASTQ_pair2', "title": "Mode de notification choisi" },
-                    { data: 'Reads.VCF', "title": "Variants" },
-                    { data: 'Genome.Contigs', "title": "Contigs" },
-                    { data: 'Genome.Assembly', "title": "Assembly" },
-                    { data: 'Genome.QUAST', "title": "Assembly quality" },
-                    { data: 'Genome.GFF', "title": "GFF" },
-                    { data: 'Genome.GBK', "title": "GBK" },
-                    { data: 'Report', "title": "ARTwork report" },
-                    { data: 'Report', "title": "ARTwork HTML report" }
+                    { data: 'reference_price', "title": "Prix" },
+                    { data: 'low_threshold', "title": "Alerte (seuil bas)" },
+                    { data: 'high_threshold', "title": "Alerte (seuil haut)" },
+                    { data: 'date_created', "title": "Alerte crée le" }
                 ],
             columnDefs:
                 [

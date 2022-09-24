@@ -33,6 +33,7 @@ def index():
     columns = ["CMC Id", "Name", "Rank", "Slug"]
 
     table_d = df.to_dict(orient="index")
+    
 
     # User.query.filter_by(username='peter')
     username = current_user.username
@@ -62,6 +63,7 @@ def index():
     )
 
     cryptos = df.to_dict(orient="index")
+    cryptos_for_json = df.to_dict(orient="records")
 
     return render_template(
         "home/index.html",
@@ -138,10 +140,9 @@ def route_template(template):
                 return redirect(url_for("home_blueprint.index"))
 
         cryptos = df_cryptos.to_dict(orient="index")
-        cryptos_for_json= df_cryptos.to_dict(orient="records")
 
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment, cryptos=cryptos, cryptos_for_json=cryptos_for_json)
+        return render_template("home/" + template, segment=segment, cryptos=cryptos)
 
     except TemplateNotFound:
         return render_template("home/page-404.html"), 404
