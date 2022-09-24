@@ -19,7 +19,7 @@
                 <select class="form-control choices__input" name="percent_crypto_selected" id="percent_crypto_selected">
                     <option value="Cette cryptommonaie (tapez pour rechercher)" selected disabled hidden></option>
                     {% for _, crypto in cryptos.items() %}
-                    <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) - - Valeur unitaire 120.49€</option>
+                    <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) — {{crypto.price_eur|round(2)}}€</option>
                     {% endfor %}
                 </select>
             </div>
