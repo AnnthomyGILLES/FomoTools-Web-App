@@ -38,26 +38,24 @@ def index():
     username = current_user.username
 
     df = pd.read_sql(
-        sql=db.session.query(
-            User.username,
-            Crypto.cmc_id,
-            Crypto.slug,
-            Crypto.symbol,
-            Alert.low_threshold,
-            Alert.high_threshold,
-            Alert.reference_price,
-            Alert.date_created,
-        )
-        .filter(
-            User.username == Crypto.username,
-        )
-        .filter(
-            Crypto.cmc_id == Alert.cmc_id,
-        )
-        .filter(
-            User.username == username,
-        )
-        .statement,
+        sql=(
+            db.session.query(
+                User.username,
+                Crypto.cmc_id,
+                Crypto.slug,
+                Crypto.symbol,
+                Alert.low_threshold,
+                Alert.high_threshold,
+                Alert.reference_price,
+                Alert.date_created,
+                Notification.discord,
+                Notification.slack,
+                Notification.telegram,
+            )
+            .join(Crypto, Crypto.username == User.username)
+            .join(Alert, Alert.cmc_id == Crypto.cmc_id)
+            .join(Notification)
+        ).statement,
         con=db.session.bind,
     )
 
