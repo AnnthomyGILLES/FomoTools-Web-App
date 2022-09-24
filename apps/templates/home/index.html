@@ -104,7 +104,7 @@
                                                 <thead>
                                                 {% for c in ["CMC ID", "Slug/Symbol", "Reference Price", "Low
                                                 Threshold", "High Threshold",
-                                                "Date Created"] %}
+                                                "Date Created", "Notification Method"] %}
                                                 <th>{{c}}</th>
                                                 {% endfor %}
                                                 </thead>
@@ -129,6 +129,9 @@
                                                     </td>
                                                     <td>
                                                         <h6 class="text-muted">{{crypto.date_created}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">{{crypto.notification_method}}</h6>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}

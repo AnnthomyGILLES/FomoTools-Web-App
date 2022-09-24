@@ -58,7 +58,10 @@ def index():
         ).statement,
         con=db.session.bind,
     )
-
+    user_notification_method = (
+        df[["discord", "slack", "telegram"]].dropna(how="all", axis=1).columns
+    )
+    df["notification_method"] = ", ".join(user_notification_method)
     cryptos = df.to_dict(orient="index")
 
     return render_template(
