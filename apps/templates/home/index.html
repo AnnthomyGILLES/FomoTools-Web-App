@@ -102,17 +102,17 @@
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
-                                                {% for c in ["CMC ID", "Slug/Symbol", "Reference Price", "Low
-                                                Threshold", "High Threshold",
-                                                "Date Created", "Notification Method"] %}
+                                                {% for c in ["Logo", "Nom", "Prix", "Seuil bas", "Seuil haut",
+                                                "Date de création", "Alerté via"] %}
                                                 <th>{{c}}</th>
                                                 {% endfor %}
                                                 </thead>
                                                 <tbody>
                                                 {% for _, crypto in cryptos.items() %}
                                                 <tr class="unread">
-                                                    <td>
-                                                        <h6>{{crypto.cmc_id}}</h6>
+                                                    <td><img class="rounded-circle" style="width:40px;"
+                                                             src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
+                                                             alt="activity-user">
                                                     </td>
                                                     <td>
                                                         <h6 class="mb-1">{{crypto.slug}}</h6>
