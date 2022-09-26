@@ -1,54 +1,63 @@
 <div class="tab-pane active" id="price" role="tabpanel" aria-labelledby="price-tab">
-                                        <div class="col-md-6">
-                                            <form method="post">
-                                                <div class="form-group"> 
-                                                    <label for="price_notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
-                                                    <select multiple class="form-control" name="price_notification_method" id="price_notification_method">
-                                                        <option value="" disabled hidden></option>
-                                                        <option value="mail"><i class="feather icon-mail"></i>Courriel</option>
-                                                        <option value="discord">Discord</option>
-                                                        <option value="browser">Navigateur</option>
-                                                        <option value="slack">Slack</option>
-                                                        <option value="telegram">Telegram</option>
-                                                        <option value="webhook">Webhook</option>
-                                                        <option value="whatsapp">Whatsapp</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group"> 
-                                                    <label for="price_crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
-                                                    <select class="form-control choices__input" name="price_crypto_selected" id="price_crypto_selected">
-                                                        <option value="Cette cryptommonaie (tapez pour rechercher)" selected disabled hidden></option>
-                                                        {% for _, crypto in cryptos.items() %}
-                                                        <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) — {{crypto.price_eur|round(2)}}€</option>
-                                                        {% endfor %}<
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="price_low_threshold"> <i class="feather icon-arrow-down"></i> passe en dessous de (€)</label>
-                                                    <input name="price_low_threshold" type="number"
-                                                            class="form-control"
-                                                            id="price_low_threshold"
-                                                            min="0" 
-                                                            step="any"
-                                                            placeholder="0"
-                                                            value="{{request.form['price_low_threshold'] }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="price_high_threshold"> <i class="feather icon-arrow-up"></i> ou au dessus de (€)</label>
-                                                    <input name="price_high_threshold" type="number"
-                                                            class="form-control"
-                                                            id="price_high_threshold"
-                                                            min="0" 
-                                                            step="any"
-                                                            placeholder="0" 
-                                                            value="{{request.form['price_high_threshold'] }}">
-                                                </div>
-                                                <div class="form-group form-check"> 
-                                                    <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
-                                                    <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a 3 fois avant désactivation automatique></labelclass></label>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary"><i class="feather icon-play-circle" id="price_submit"></i>Créer l'alerte</button>
-                                                <button type="reset" class="btn btn-secondary"><i class="feather icon-minus-circle" id="price_reset"></i>Remettre à zéro</button>
-                                            </form>
-                                        </div>
-                                    </div>
+    <div class="col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <label for="price_notification_method"><i class="feather icon-alert-circle"></i> Alertez moi via</label>
+                <select multiple class="form-control" name="price_notification_method" id="price_notification_method">
+                    <option value="" disabled hidden></option>
+                    <option value="mail"><i class="feather icon-mail"></i>Courriel</option>
+                    <option value="discord">Discord</option>
+                    <option value="browser">Navigateur</option>
+                    <option value="slack">Slack</option>
+                    <option value="telegram">Telegram</option>
+                    <option value="webhook">Webhook</option>
+                    <option value="whatsapp">Whatsapp</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price_crypto_selected"><i class="feather icon-shopping-cart"></i> Quand la valeur de</label>
+                <select class="form-control choices__input" name="price_crypto_selected" id="price_crypto_selected">
+                    <option value="Cette cryptommonaie (tapez pour rechercher)" selected disabled hidden></option>
+                    {% for _, crypto in cryptos.items() %}
+                    <option value="{{crypto.slug}}">{{crypto.slug}} ({{crypto.symbol}}) —
+                        {{crypto.price_eur|round(2)}}€
+                    </option>
+                    {% endfor %}<
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price_low_threshold"> <i class="feather icon-arrow-down"></i> passe en dessous de
+                    (€)</label>
+                <input name="price_low_threshold" type="number"
+                       class="form-control"
+                       id="price_low_threshold"
+                       min="0"
+                       step="any"
+                       placeholder="0"
+                       value="{{request.form['price_low_threshold'] }}">
+            </div>
+            <div class="form-group">
+                <label for="price_high_threshold"> <i class="feather icon-arrow-up"></i> ou au dessus de (€)</label>
+                <input name="price_high_threshold" type="number"
+                       class="form-control"
+                       id="price_high_threshold"
+                       min="0"
+                       step="any"
+                       placeholder="0"
+                       value="{{request.form['price_high_threshold'] }}">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="snooze" name="snooze"
+                       value="{{ request.form['snooze'] }}">
+                <label class="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a 3 fois avant désactivation
+                    automatique></label>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="feather icon-play-circle" id="price_submit"></i>Créer
+                l'alerte
+            </button>
+            <button type="reset" class="btn btn-secondary"><i class="feather icon-minus-circle" id="price_reset"></i>Remettre
+                à zéro
+            </button>
+        </form>
+    </div>
+</div>
