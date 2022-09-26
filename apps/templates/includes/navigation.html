@@ -88,7 +88,8 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+                            <img src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg" class="img-radius"
+                                 alt="User-Profile-Image">
                             <span>
                                 {{ current_user.username }}    
                             </span>
@@ -101,8 +102,11 @@
                                 Settings</a></li>
                             <li><a href="#" class="dropdown-item disabled"><i class="feather icon-user"></i>
                                 Profile</a></li>
+                            <li><a href="{{ url_for('authentication_blueprint.change_password') }}"><i
+                                    class="feather icon-lock"></i> Change
+                                Password</a></li>
                             <li><a href="{{ url_for('authentication_blueprint.logout') }}" class="dropdown-item">
-                                <i class="feather icon-lock"></i> Logout</a>
+                                <i class="feather icon-log-out"></i> Logout</a>
                             </li>
                         </ul>
                     </div>

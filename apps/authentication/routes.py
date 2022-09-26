@@ -3,14 +3,14 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from flask import render_template, redirect, request, url_for
-from flask_login import current_user, login_user, logout_user
+from flask import render_template, redirect, request, url_for, flash
+from flask_login import current_user, login_user, logout_user, login_required
 
 from apps import db, login_manager
 from apps.authentication import blueprint
-from apps.authentication.forms import LoginForm, CreateAccountForm
+from apps.authentication.forms import LoginForm, CreateAccountForm, ChangePasswordForm
 from apps.authentication.models import User
-from apps.authentication.util import verify_pass
+from apps.authentication.util import verify_pass, hash_pass
 
 
 @blueprint.route("/")
@@ -99,6 +99,28 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for("authentication_blueprint.login"))
+
+
+@blueprint.route("/change-password", methods=["GET", "POST"])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if request.method == "POST":
+        # Locate user
+        user = User.query.filter_by(username=current_user.username).first()
+
+        provided_old_password = form.old_password.data
+
+        # Check the password
+        if user and verify_pass(provided_old_password, user.password):
+            user.password = hash_pass(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash("Your password has been updated.")
+            return redirect(url_for("home_blueprint.index"))
+        else:
+            flash("Invalid password.")
+    return render_template("accounts/change_password.html", form=form)
 
 
 # Errors
