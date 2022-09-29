@@ -23,66 +23,71 @@
                                         <h5>Edit Info</h5>
                                     </div>
                                     <div class="card-block">
-                                        <h5>Telegram</h5>
-                                        <div class="row">
-                                            <div class="col-sm-12 mb-4">
-                                                <div class="form-group">
-                                                    <label for="tgram_chat_id">Telegram Chat ID</label>
-                                                    <input type="text" class="form-control" id="tgram_chat_id"
-                                                           aria-describedby="emailHelp" placeholder="Telegram Chat ID">
+                                        <form method="POST">
+                                            <h5>Telegram</h5>
+                                            <div class="row">
+                                                <div class="col-sm-12 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="tgram_chat_id">Telegram Chat ID</label>
+                                                        <input type="text" class="form-control" id="tgram_chat_id"
+                                                               value="{{request.form['tgram_chat_id'] }}"
+                                                               placeholder="Telegram Chat ID">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <h5>Discord</h5>
-                                        <div class="row">
-                                            <div class="col-sm-6 mb-4">
-                                                <div class="form-group">
-                                                    <label for="discord_webhook">Webhook ID</label>
-                                                    <input type="text" class="form-control" id="discord_webhook"
-                                                           aria-describedby="emailHelp" placeholder="WebhookID">
+                                            <h5>Discord</h5>
+                                            <div class="row">
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="discord_webhook">Webhook ID</label>
+                                                        <input type="text" class="form-control" id="discord_webhook"
+                                                               value="{{request.form['discord_webhook']}}"
+                                                               placeholder="WebhookID">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="discord_token">Webhook Token</label>
+                                                        <input type="text" class="form-control" id="discord_token"
+                                                               value="{{request.form['discord_token']}}"
+                                                               placeholder="WebhookToken">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 mb-4">
-                                                <div class="form-group">
-                                                    <label for="discord_token">Webhook Token</label>
-                                                    <input type="email" class="form-control" id="discord_token"
-                                                           aria-describedby="emailHelp" placeholder="WebhookToken">
+                                            <h5>Slack</h5>
+                                            <div class="row">
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_tokena">Token A</label>
+                                                        <input type="text" class="form-control" id="slack_tokena"
+                                                               value="{{request.form['slack_tokena'] }}"
+                                                               placeholder="Token A">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_tokenb">Token B</label>
+                                                        <input type="text" class="form-control" id="slack_tokenb"
+                                                               placeholder="Token B">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_tokenc">Token C</label>
+                                                        <input type="text" class="form-control" id="slack_tokenc"
+                                                               placeholder="Token C">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_channel">Channel</label>
+                                                        <input type="text" class="form-control" id="slack_channel"
+                                                               placeholder="Channel">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <h5>Slack</h5>
-                                        <div class="row">
-                                            <div class="col-sm-3 mb-4">
-                                                <div class="form-group">
-                                                    <label for="add">Token A</label>
-                                                    <input type="text" class="form-control" id="add"
-                                                           aria-describedby="emailHelp" placeholder="Token A">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 mb-4">
-                                                <div class="form-group">
-                                                    <label for="add">Token B</label>
-                                                    <input type="text" class="form-control" id="add"
-                                                           aria-describedby="emailHelp" placeholder="Token B">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 mb-4">
-                                                <div class="form-group">
-                                                    <label for="add">Token C</label>
-                                                    <input type="email" class="form-control" id="add"
-                                                           aria-describedby="emailHelp" placeholder="Token C">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 mb-4">
-                                                <div class="form-group">
-                                                    <label for="add">Channel</label>
-                                                    <input type="email" class="form-control" id="add"
-                                                           aria-describedby="emailHelp" placeholder="Channel">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary"><i id="notifications_submit"></i>Soumettre
-                                        </button>
+                                            <button type="submit" class="btn btn-primary">Soumettre</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +122,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <!-- [ Main Content ] end -->
                     </div>
                 </div>
