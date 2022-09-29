@@ -76,6 +76,40 @@ def index():
     )
 
 
+@blueprint.route("/profile")
+@login_required
+def profile(template):
+    try:
+        segment = get_segment(request)
+        user = User.query.filter_by(username=current_user.username).first()
+
+        if request.method == "POST":
+            discord_webhook = request.form["discord_webhook"]
+            discord_token = request.form["discord_token"]
+
+            slack_tokena = request.form["slack_tokena"]
+            slack_tokenb = request.form["slack_tokenb"]
+            slack_tokenc = request.form["slack_tokenc"]
+            slack_channel = request.form["slack_channel"]
+
+            tgram_chat_id = request.form["tgram_chat_id"]
+            user.discord = "/".join([discord_webhook, discord_token])
+            user.slack = "/".join(
+                [slack_tokena, slack_tokenb, slack_tokenc, slack_channel]
+            )
+            user.discord = tgram_chat_id
+            db.session.add(user)
+            db.session.commit()
+
+            return redirect(url_for("home_blueprint.index"))
+
+        # Serve the file (if exists) from app/templates/home/FILE.html
+        return render_template("home/" + template, segment=segment)
+
+    except TemplateNotFound:
+        return render_template("home/page-404.html"), 404
+
+
 @blueprint.route("/<template>", methods=("GET", "POST"))
 @login_required
 def route_template(template):
