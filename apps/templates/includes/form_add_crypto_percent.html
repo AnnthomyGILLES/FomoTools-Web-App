@@ -43,26 +43,6 @@
                         placeholder="0" 
                         value="{{request.form['percent_high_threshold'] }}">
             </div>
-            <div class="form-group">
-                <label for="discord_webhook_id"> <i class="feather icon-arrow-up"></i> Discord Webook ID</label>
-                <input name="discord_webhook_id" type="text"
-                        class="form-control"
-                        id="discord_webhook_id"
-                        min="0" 
-                        step="any"
-                        placeholder="0" 
-                        value="{{request.form['discord_webhook_id'] }}">
-            </div>
-            <div class="form-group">
-                <label for="discord_webhook_token"> <i class="feather icon-arrow-up"></i> Discord Webook Token</label>
-                <input name="discord_webhook_token" type="text"
-                        class="form-control"
-                        id="discord_webhook_token"
-                        min="0" 
-                        step="any"
-                        placeholder="0" 
-                        value="{{request.form['discord_webhook_token'] }}">
-            </div>
             <div class="form-group form-check"> 
                 <input type="checkbox" class="form-check-input" id="snooze" name="snooze" value="{{ request.form['snooze'] }}">
                 <labelclass="form-check-label" for="snooze">Snooze: Répeter l'alerte jusqu'a 3 fois avant désactivation automatique</label>

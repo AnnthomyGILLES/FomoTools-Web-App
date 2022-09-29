@@ -31,9 +31,12 @@
     <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/style.css">
     <!-- dark mode css -->
     <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/dark.css">
+    <!-- Custom CSS appliable on every webapp pages -->
+    <link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/custom/custom-all.css">
 
     <!-- Specific CSS goes HERE -->
-    {% block stylesheets %}{% endblock stylesheets %}
+    {% block stylesheets %}
+    {% endblock stylesheets %}
 
 </head>
 <body>
