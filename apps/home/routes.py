@@ -76,24 +76,26 @@ def index():
     )
 
 
-@blueprint.route("/profile")
+@blueprint.route("/profile.html", methods=("GET", "POST"))
 @login_required
-def profile(template):
+def profile():
     try:
         segment = get_segment(request)
         user = User.query.filter_by(username=current_user.username).first()
 
         if request.method == "POST":
-            discord_webhook = request.form["discord_webhook"]
-            discord_token = request.form["discord_token"]
+            default_value = ""
+            discord_webhook = request.form.get("discord_webhook", default_value)
+            discord_token = request.form.get("discord_token", default_value)
 
-            slack_tokena = request.form["slack_tokena"]
-            slack_tokenb = request.form["slack_tokenb"]
-            slack_tokenc = request.form["slack_tokenc"]
-            slack_channel = request.form["slack_channel"]
+            slack_tokena = request.form.get("slack_tokena", default_value)
+            slack_tokenb = request.form.get("slack_tokenb", default_value)
+            slack_tokenc = request.form.get("slack_tokenc", default_value)
+            slack_channel = request.form.get("slack_channel", default_value)
 
-            tgram_chat_id = request.form["tgram_chat_id"]
-            user.discord = "/".join([discord_webhook, discord_token])
+            tgram_chat_id = request.form.get("tgram_chat_id", default_value)
+            # user.discord = "/".join([discord_webhook, discord_token])
+            user.discord = ", ".join(filter(None, (discord_webhook, discord_token)))
             user.slack = "/".join(
                 [slack_tokena, slack_tokenb, slack_tokenc, slack_channel]
             )
@@ -104,7 +106,7 @@ def profile(template):
             return redirect(url_for("home_blueprint.index"))
 
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment)
+        return render_template("home/profile.html", segment=segment, user_data=user)
 
     except TemplateNotFound:
         return render_template("home/page-404.html"), 404
