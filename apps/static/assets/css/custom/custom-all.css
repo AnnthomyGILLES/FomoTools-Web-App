@@ -1,3 +1,13 @@
 .nav-link.active {
     background: #3f4d67 !important;
 }
+
+.btn-primary:not(:hover){
+    background: #3f4d67 !important;
+    border-color: #3f4d67 !important;
+}
+
+button:hover{
+    background-color: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+}

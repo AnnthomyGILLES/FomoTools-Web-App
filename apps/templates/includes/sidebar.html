@@ -69,13 +69,22 @@
                 </li>
                 <li data-username="Contactez-nous"
                     class="nav-item pcoded-hasmenu">
-                    <a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="feather icon-message-circle"></i></span><span
+                    <a href="javascript:" class="nav-link {% if 'support' in segment %} active {% endif %}"><span class="pcoded-micon"><i class="feather icon-message-circle"></i></span><span
                             class="pcoded-mtext">Contactez-nous</span></a>
                     <ul class="pcoded-submenu">
-                        <li class=""><a href="#" class="nav-item {% if 'support' in segment %} active {% endif %}"><i class="feather icon-headphones"></i> Support</a></li>
+                        <li class=""><a href="mailto:contact@ak-intelligence.com"><i class="feather icon-headphones"></i> Support</a></li>
                         <li class=""><a href="#" class="disabled"><i class="feather icon-users"></i> Discord</a></li>
                         <li class=""><a href="#" class="disabled"><i class="feather icon-users"></i> Forum</a></li>
                     </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Soutenez-nous (c'est apprécié!)</label>
+                    <a class="nav-link disabled">
+                        <span class="pcoded-mtext">BTC:XXXXXXX</span>
+                    </a>
+                    <a class="nav-link disabled">
+                        <span class="pcoded-mtext">ETH:XXXXXXX</span>
+                    </a>
                 </li>
             </ul>
         </div>
