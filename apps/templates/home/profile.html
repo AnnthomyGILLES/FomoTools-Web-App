@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="card-block">
                                         <form method="POST" name="tokens">
-                                            <h5>Telegram</h5>
+                                            <h5>Telegram - {{user_data.telegram}}</h5>
                                             <div class="row">
                                                 <div class="col-sm-12 mb-4">
                                                     <div class="form-group">
@@ -36,13 +36,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h5>Discord</h5>
+                                            <h5>Discord - {{user_data.discord}}</h5>
                                             <div class="row">
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group">
                                                         <label for="discord_webhook">Webhook ID</label>
                                                         <input type="text" class="form-control" id="discord_webhook"
-                                                               value="{{request.form['discord_webhook']}}"
+                                                               value="{{request.form['discord_webhook'] }}"
                                                                name="discord_webhook"
                                                                placeholder="WebhookID">
                                                     </div>
@@ -52,12 +52,12 @@
                                                         <label for="discord_token">Webhook Token</label>
                                                         <input type="text" class="form-control" id="discord_token"
                                                                name="discord_token"
-                                                               value="{{request.form['discord_token']}}"
+                                                               value="{{request.form['discord_token'] }}"
                                                                placeholder="WebhookToken">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h5>Slack</h5>
+                                            <h5>Slack - {{user_data.slack}}</h5>
                                             <div class="row">
                                                 <div class="col-sm-3 mb-4">
                                                     <div class="form-group">
@@ -72,6 +72,7 @@
                                                     <div class="form-group">
                                                         <label for="slack_tokenb">Token B</label>
                                                         <input type="text" class="form-control" id="slack_tokenb"
+                                                               value="{{request.form['slack_tokenb'] }}"
                                                                name="slack_tokenb"
                                                                placeholder="Token B">
                                                     </div>
@@ -80,6 +81,7 @@
                                                     <div class="form-group">
                                                         <label for="slack_tokenc">Token C</label>
                                                         <input type="text" class="form-control" id="slack_tokenc"
+                                                               value="{{request.form['slack_tokenc'] }}"
                                                                name="slack_tokenc"
                                                                placeholder="Token C">
                                                     </div>
@@ -88,6 +90,7 @@
                                                     <div class="form-group">
                                                         <label for="slack_channel">Channel</label>
                                                         <input type="text" class="form-control" id="slack_channel"
+                                                               value="{{request.form['slack_channel'] }}"
                                                                name="slack_channel"
                                                                placeholder="Channel">
                                                     </div>
