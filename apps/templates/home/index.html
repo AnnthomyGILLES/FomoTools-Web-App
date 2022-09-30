@@ -38,8 +38,8 @@
                                         </div>
                                         <div class="progress m-t-30" style="height: 7px;">
                                             <div class="progress-bar progress-c-theme" role="progressbar"
-                                                style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                                 style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -62,8 +62,8 @@
                                         </div>
                                         <div class="progress m-t-30" style="height: 7px;">
                                             <div class="progress-bar progress-c-theme2" role="progressbar"
-                                                style="width: 35%;" aria-valuenow="35" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                                 style="width: 35%;" aria-valuenow="35" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,8 +86,8 @@
                                         </div>
                                         <div class="progress m-t-30" style="height: 7px;">
                                             <div class="progress-bar progress-c-theme" role="progressbar"
-                                                style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                                 style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,29 +152,29 @@
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
-                                                    {% for c in columns %}
-                                                    <th>{{c}}</th>
-                                                    {% endfor %}
+                                                {% for c in columns %}
+                                                <th>{{c}}</th>
+                                                {% endfor %}
                                                 </thead>
                                                 <tbody>
-                                                    {% for k, v in table_data.items() %}
-                                                    <tr class="unread">
-                                                        <td><img class="rounded-circle" style="width:40px;"
-                                                                src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
-                                                                alt="activity-user">
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="mb-1">{{v.name}}</h6>
-                                                            <p class="m-0">{{v.symbol}}</p>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="text-muted">{{v.rank}}</h6>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="text-muted">{{v.slug}}</h6>
-                                                        </td>
-                                                    </tr>
-                                                    {% endfor %}
+                                                {% for k, v in table_data.items() %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;"
+                                                             src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
+                                                             alt="activity-user">
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{v.name}}</h6>
+                                                        <p class="m-0">{{v.symbol}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">{{v.rank}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">{{v.slug}}</h6>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -188,9 +188,10 @@
             </div>
         </div>
     </div>
-    <!-- [ Main Content ] end -->
+</div>
+<!-- [ Main Content ] end -->
 
-    {% endblock content %}
+{% endblock content %}
 
-    <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}{% endblock javascripts %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
