@@ -17,7 +17,8 @@ def detect_threshold(data):
     df = df[["name", "slug", "EUR.price", "symbol"]]
     df = df[["symbol", "EUR.price"]].rename(columns={"EUR.price": "price"})
 
-    data = data.merge(df, on="symbol", how="left")
+    df_obs = data.copy()
+    data = df_obs.merge(df, on="symbol", how="left")
 
     data["diminue"] = (data["low_threshold"] < data["reference_price"]) & (
         data["low_threshold"] >= data["price"]
@@ -42,32 +43,48 @@ def detect_threshold(data):
 
 def send_notification(data):
     for index, row in data.iterrows():
-        row = row.to_dict()
-        discord_api_key = row.get("discord")
-        username = row.get("username")
         slug = row.get("slug")
         low_threshold = row.get("low_threshold")
         high_threshold = row.get("high_threshold")
-        reference_price = row.get("reference_price")
         price = row.get("price")
         notification = row.get("notification")
         symbol = row.get("symbol")
-        webhook_id, webhook_token = discord_api_key.split("/")
         body = None
         if notification == "diminue":
             body = f"Le prix de {slug} ({symbol}) a dépassé votre seuil {low_threshold} et a atteint: {price}."
         elif notification == "augmente":
             body = f"Le prix de {slug} ({symbol})  a dépassé votre seuil {high_threshold} et a atteint: {price}."
-        hook = {
-            "webhook_id": webhook_id,
-            "webhook_token": webhook_token,
-        }
+
         message = {
             "title": "Votre seuil a été atteint!",
             "body": body,
         }
-        notifier = Notifier.to_discord(**hook)
-        notifier.notify(**message)
+
+        for method in row.get("notification_type").split(","):
+            # row = row.to_dict()
+            api_key = row.get(method)
+
+            notifier = None
+            if method == "discord":
+                webhook_id, webhook_token = api_key.split("/")
+                hook = {
+                    "webhook_id": webhook_id,
+                    "webhook_token": webhook_token,
+                }
+                notifier = Notifier.to_discord(**hook)
+            elif method == "telegram":
+                notifier = Notifier.to_telegram("679706949")
+            elif method == "slack":
+                token_a, token_b, token_c, channel = api_key.split("/")
+                slack_params = {
+                    "token_a": token_a,
+                    "token_b": token_b,
+                    "token_c": token_c,
+                    "channel": channel,
+                }
+                notifier = Notifier.to_slack(**slack_params)
+
+            notifier.notify(**message)
 
 
 if __name__ == "__main__":
@@ -99,6 +116,7 @@ if __name__ == "__main__":
                     Alert.high_threshold,
                     Alert.reference_price,
                     Alert.cmc_id,
+                    Alert.notification_type,
                     User.discord,
                     User.slack,
                     User.telegram,

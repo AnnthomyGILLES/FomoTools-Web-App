@@ -28,6 +28,7 @@ class Alert(db.Model):
     low_threshold = db.Column(db.Integer, nullable=True)
     high_threshold = db.Column(db.Integer, nullable=True)
     reference_price = db.Column(db.Float, nullable=True)
+    notification_type = db.Column(db.String(16), nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     cmc_id = db.Column(db.Integer, db.ForeignKey("cryptos.cmc_id"))
     user_id = db.Column(db.String(64), db.ForeignKey("users.id"))
