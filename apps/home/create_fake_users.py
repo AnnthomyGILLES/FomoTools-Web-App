@@ -8,7 +8,6 @@ from apps.authentication.models import (
     Crypto,
     Alert,
     User,
-    Notification,
 )
 from apps.config import config_dict
 from apps.home.routes import get_or_create
@@ -20,17 +19,20 @@ def create_fake_users(nb_users, nb_cryptos):
         db.create_all()
         faker = Faker()
         for i in range(nb_users):
-            username = faker.name()
+            username = faker.last_name()
 
             user = User(
                 username=username,
                 password="test_password",
                 email=faker.email(),
+                discord=faker.pystr(20, 40),
+                slack=faker.pystr(20, 40),
+                telegram=faker.pystr(20, 40),
             )
             db.session.add(user)
             db.session.commit()
 
-            for j in range(nb_cryptos):
+            for _ in range(nb_cryptos):
                 cmc_id = random.randint(1, 10000)
                 symbol, slug = faker.cryptocurrency()
                 crypto = get_or_create(
@@ -52,15 +54,8 @@ def create_fake_users(nb_users, nb_cryptos):
                     reference_price=random.randint(1, 10000),
                 )
 
-                notification = get_or_create(
-                    db.session,
-                    Notification,
-                    discord=faker.pystr(20, 40),
-                    alerts=alert,
-                )
                 db.session.add(crypto)
                 db.session.add(alert)
-                db.session.add(notification)
                 db.session.commit()
             print(f"Added {nb_users} fake users to the database.")
 
