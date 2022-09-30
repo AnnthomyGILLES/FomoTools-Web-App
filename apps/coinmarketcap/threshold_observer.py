@@ -17,10 +17,7 @@ def detect_threshold(data):
     df = df[["name", "slug", "EUR.price", "symbol"]]
     df = df[["symbol", "EUR.price"]].rename(columns={"EUR.price": "price"})
 
-    # TODO Remove this for production
-    df_obs = data.copy()
-    df_obs["reference_price"] = df_obs["low_threshold"] - 100
-    data = df_obs.merge(df, on="symbol", how="left")
+    data = data.merge(df, on="symbol", how="left")
 
     data["diminue"] = (data["low_threshold"] < data["reference_price"]) & (
         data["low_threshold"] >= data["price"]
@@ -74,13 +71,6 @@ def send_notification(data):
 
 
 if __name__ == "__main__":
-    # data = [
-    #     ["BTC", 19870, 19860, 19875, "blackperl"],
-    #     ["ETH", 1700, 1600, 1775, "blackperl"],
-    #     ["ETH", 1574.6, np.nan, 1574.7, "gotama"],
-    #     ["ETH", 1700, 1602, np.nan, "gotama"],
-    # ]
-
     # WARNING: Don't run with debug turned on in production!
     DEBUG = "True"
 
@@ -99,7 +89,6 @@ if __name__ == "__main__":
     Migrate(app, db)
 
     with app.app_context():
-        # TODO: Correct cartesian product offollowing query
         data = pd.read_sql(
             sql=(
                 db.session.query(
@@ -122,8 +111,3 @@ if __name__ == "__main__":
 
         df_user_notifications = detect_threshold(data)
         send_notification(df_user_notifications)
-
-#
-#     'apprise -vv -t "Test Message Title" -b "Test Message Body" \
-#    discord://1016780345712054322/ZLqpN63QakgG1mIdMCBdfdPvQN95fmwFhcWb-TkFe8a8ieJ6zMCikLUV5Cmb4IdOjgm1'
-# https://discord.com/api/webhooks/1016780345712054322/ZLqpN63QakgG1mIdMCBdfdPvQN95fmwFhcWb-TkFe8a8ieJ6zMCikLUV5Cmb4IdOjgm1
