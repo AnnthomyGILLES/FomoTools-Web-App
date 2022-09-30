@@ -52,6 +52,7 @@ def create_fake_users(nb_users, nb_cryptos):
                     user_id=i + 1,
                     cmc_id=cmc_id,
                     reference_price=random.randint(1, 10000),
+                    notification_type=random.choice(["discord", "slack", "telegram"]),
                 )
 
                 db.session.add(crypto)
