@@ -29,11 +29,10 @@ def index():
     cmc = CryptoMarket()
 
     df = cmc.get_cryptos_names().sort_values(by="rank").head(10)
-    columns = ["CMC Id", "Name", "Rank", "Slug"]
+    columns = ["Logo", "Name", "Rank", "Slug"]
 
     table_d = df.to_dict(orient="index")
 
-    # User.query.filter_by(username='peter')
     username = current_user.username
 
     df = pd.read_sql(
@@ -47,6 +46,7 @@ def index():
                 Alert.high_threshold,
                 Alert.reference_price,
                 Alert.date_created,
+                Alert.notification_type,
                 User.discord,
                 User.slack,
                 User.telegram,
@@ -59,10 +59,6 @@ def index():
         ).statement,
         con=db.session.bind,
     )
-    user_notification_method = (
-        df[["discord", "slack", "telegram"]].dropna(how="all", axis=1).columns
-    )
-    df["notification_method"] = ", ".join(user_notification_method)
     cryptos = df.to_dict(orient="index")
 
     return render_template(
@@ -143,7 +139,9 @@ def route_template(template):
         segment = get_segment(request)
 
         if request.method == "POST":
-            price_notification_method = request.form["price_notification_method"]
+            price_notification_method = request.form.getlist(
+                "price_notification_method"
+            )
             slug = request.form["price_crypto_selected"]
             cmc_id, symbol, price_eur = df_cryptos[df_cryptos["slug"] == slug][
                 ["id", "symbol", "price_eur"]
@@ -176,6 +174,7 @@ def route_template(template):
                     user_id=user_id,
                     cmc_id=cmc_id,
                     reference_price=price_eur,
+                    notification_type=",".join(price_notification_method),
                 )
 
                 db.session.add(crypto)
