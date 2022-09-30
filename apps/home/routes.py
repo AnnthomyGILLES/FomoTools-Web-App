@@ -18,6 +18,8 @@ from apps.authentication.models import (
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.home import blueprint
 
+NOTIFICATIONS_METHODS = ("discord", "slack", "telegram")
+
 
 class NoInstanceFoundError(Exception):
     pass
@@ -73,7 +75,6 @@ def index():
 @blueprint.route("/profile", methods=("GET", "POST"))
 @login_required
 def profile():
-    notifications_methods = ("discord", "slack", "telegram")
     try:
         segment = get_segment(request)
         user = User.query.filter_by(username=current_user.username).first()
@@ -111,7 +112,7 @@ def profile():
             return redirect(url_for("home_blueprint.index"))
 
         user_data = user.__dict__.copy()
-        notifications = {k: user_data.get(k, None) for k in notifications_methods}
+        notifications = {k: user_data.get(k, None) for k in NOTIFICATIONS_METHODS}
 
         # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template(
@@ -126,7 +127,12 @@ def profile():
 @login_required
 def route_template(template):
     try:
-
+        user = User.query.filter_by(username=current_user.username).first()
+        user_data = user.__dict__.copy()
+        notifications = {k: user_data.get(k, None) for k in NOTIFICATIONS_METHODS}
+        user_tokens = {
+            k: "true" if v is not None else "false" for k, v in notifications.items()
+        }
         cmc = CryptoMarket()
         df_cryptos = cmc.get_listings(convert="EUR")
         df_cryptos = df_cryptos[["id", "symbol", "slug", "quote.EUR.price"]].rename(
@@ -185,7 +191,12 @@ def route_template(template):
         cryptos = df_cryptos.to_dict(orient="index")
 
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment, cryptos=cryptos)
+        return render_template(
+            "home/" + template,
+            segment=segment,
+            cryptos=cryptos,
+            user_tokens=user_tokens,
+        )
 
     except TemplateNotFound:
         return render_template("home/page-404.html"), 404
