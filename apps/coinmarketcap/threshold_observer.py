@@ -3,7 +3,7 @@ import pandas as pd
 from flask_migrate import Migrate
 
 from apps import db, create_app
-from apps.authentication.models import User, Alert, Crypto, Notification
+from apps.authentication.models import User, Alert, Crypto
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.config import config_dict
 from apps.notifications.notification_manager import Notifier
@@ -110,11 +110,12 @@ if __name__ == "__main__":
                     Alert.high_threshold,
                     Alert.reference_price,
                     Alert.cmc_id,
-                    Notification.discord,
+                    User.discord,
+                    User.slack,
+                    User.telegram,
                 )
                 .join(Crypto, Crypto.username == User.username)
                 .join(Alert, Alert.cmc_id == Crypto.cmc_id)
-                .join(Notification)
             ).statement,
             con=db.session.bind,
         )
