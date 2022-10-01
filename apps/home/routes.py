@@ -154,7 +154,7 @@ def route_template(template):
 
             if slug is None:
                 slug = request.form.get("percent_crypto_selected")
-            if price_notification_method is None:
+            if not price_notification_method:
                 price_notification_method = request.form.getlist(
                     "percent_notification_method"
                 )
