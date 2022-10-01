@@ -159,6 +159,11 @@ def route_template(template):
                 flash("Slug is required!")
             elif not symbol:
                 flash("Symbol is required!")
+            elif not float(low_threshold) <= price_eur <= float(high_threshold):
+                flash(
+                    "Les seuils définis doivent contenir le prix de référence. Le prix de référence ne peut pas être "
+                    "inférieur au seuil inférieur, et supérieur au seuil supérieur."
+                )
             else:
                 user_id = (
                     User.query.filter(User.username == current_user.username).first().id
