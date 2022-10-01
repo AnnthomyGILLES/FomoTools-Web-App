@@ -148,12 +148,24 @@ def route_template(template):
             price_notification_method = request.form.getlist(
                 "price_notification_method"
             )
-            slug = request.form["price_crypto_selected"]
+            slug = request.form.get("price_crypto_selected")
+            low_threshold = request.form.get("price_low_threshold")
+            high_threshold = request.form.get("price_high_threshold")
+
+            if slug is None:
+                slug = request.form.get("percent_crypto_selected")
+
             cmc_id, symbol, price_eur = df_cryptos[df_cryptos["slug"] == slug][
                 ["id", "symbol", "price_eur"]
             ].values.tolist()[0]
-            low_threshold = request.form["price_low_threshold"]
-            high_threshold = request.form["price_high_threshold"]
+
+            if low_threshold is None:
+                low_threshold = int(request.form["percent_low_threshold"])
+                low_threshold = price_eur - (price_eur * (low_threshold / 100))
+
+            if high_threshold is None:
+                high_threshold = int(request.form["percent_high_threshold"])
+                high_threshold = price_eur + (price_eur * (high_threshold / 100))
 
             if not slug:
                 flash("Slug is required!")
