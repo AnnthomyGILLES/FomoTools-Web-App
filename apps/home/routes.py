@@ -154,6 +154,10 @@ def route_template(template):
 
             if slug is None:
                 slug = request.form.get("percent_crypto_selected")
+            if price_notification_method is None:
+                price_notification_method = request.form.getlist(
+                    "percent_notification_method"
+                )
 
             cmc_id, symbol, price_eur = df_cryptos[df_cryptos["slug"] == slug][
                 ["id", "symbol", "price_eur"]
