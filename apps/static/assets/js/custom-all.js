@@ -96,6 +96,10 @@ let priceCryptoSelectedChoice = new Choices(priceCryptoSelectedForm, {
 // // On invalid elements for all forms
 // addEventListener('invalid', (event) => {});
 
-// oninvalid = (event) => { 
+// oninvalid = (event) => {
 //   $('.form-control').attr('class', '.form-control is-invalid');
 // };
+// Rename table headers (temp solution before built-in language internationalization)
+$(th_Name).html("Nom et Symbole"); 
+$(th_Rank).html("Position"); 
+$(th_Slug).html("Nom"); 
