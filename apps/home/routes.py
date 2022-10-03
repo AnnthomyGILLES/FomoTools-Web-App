@@ -18,7 +18,7 @@ from apps.authentication.models import (
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.home import blueprint
 
-NOTIFICATIONS_METHODS = ("discord", "slack", "telegram")
+NOTIFICATIONS_METHODS = ("discord", "slack", "telegram", "fomobot")
 
 
 class NoInstanceFoundError(Exception):
@@ -50,6 +50,7 @@ def index():
                 Alert.date_created,
                 Alert.notification_type,
                 User.discord,
+                User.fomobot,
                 User.slack,
                 User.telegram,
             )
@@ -83,6 +84,7 @@ def profile():
             DEFAULT_VALUE = None
             discord_webhook = request.form.get("discord_webhook", DEFAULT_VALUE)
             discord_token = request.form.get("discord_token", DEFAULT_VALUE)
+            discord_username = request.form.get("discord_username", DEFAULT_VALUE)
 
             slack_tokena = request.form.get("slack_tokena", DEFAULT_VALUE)
             slack_tokenb = request.form.get("slack_tokenb", DEFAULT_VALUE)
@@ -105,6 +107,8 @@ def profile():
                 user.slack = slack_key
             if tgram_chat_id != "":
                 user.telegram = tgram_chat_id
+            if discord_username != "":
+                user.fomobot = discord_username
 
             db.session.add(user)
             db.session.commit()

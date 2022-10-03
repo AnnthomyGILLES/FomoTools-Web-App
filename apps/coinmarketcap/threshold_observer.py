@@ -6,6 +6,7 @@ from apps import db, create_app
 from apps.authentication.models import User, Alert, Crypto
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.config import config_dict
+from apps.notifications.fomobot.bot import send_discord_bot_notification
 from apps.notifications.notification_manager import Notifier
 
 
@@ -49,11 +50,14 @@ def send_notification(data):
         price = row.get("price")
         notification = row.get("notification")
         symbol = row.get("symbol")
-        body = None
+        fomobot_username = row.get("fomobot")
+        body = color = None
         if notification == "diminue":
             body = f"Le prix de {slug} ({symbol}) a dépassé votre seuil {low_threshold} et a atteint: {price}."
+            color = 0xFF2600
         elif notification == "augmente":
             body = f"Le prix de {slug} ({symbol})  a dépassé votre seuil {high_threshold} et a atteint: {price}."
+            color = 0x00FF00
 
         message = {
             "title": "Votre seuil a été atteint!",
@@ -72,6 +76,11 @@ def send_notification(data):
                     "webhook_token": webhook_token,
                 }
                 notifier = Notifier.to_discord(**hook)
+
+            elif method == "fomobot":
+                send_discord_bot_notification(
+                    fomobot_username, message["title"], message["body"], color
+                )
             elif method == "telegram":
                 notifier = Notifier.to_telegram("679706949")
             elif method == "slack":
@@ -118,6 +127,7 @@ if __name__ == "__main__":
                     Alert.cmc_id,
                     Alert.notification_type,
                     User.discord,
+                    User.fomobot,
                     User.slack,
                     User.telegram,
                 )
