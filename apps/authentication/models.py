@@ -56,6 +56,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.LargeBinary)
     slack = db.Column(db.String(64), nullable=True)
     discord = db.Column(db.String(64), nullable=True)
+    fomobot = db.Column(db.String(64), nullable=True)
     telegram = db.Column(db.String(64), nullable=True)
 
     crypto_id = db.relationship("Crypto", backref="users")
