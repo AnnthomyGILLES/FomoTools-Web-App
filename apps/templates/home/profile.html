@@ -24,19 +24,19 @@
                                     </div>
                                     <div class="card-block">
                                         <form method="POST" name="tokens">
-                                            <h5>Telegram - {{user_data.telegram}}</h5>
+                                            <h5>Discord (utilisateur : le plus simple) - {{user_data.discord}}</h5>
                                             <div class="row">
-                                                <div class="col-sm-12 mb-4">
+                                                <div class="col-sm-6 mb-4">
                                                     <div class="form-group">
-                                                        <label for="tgram_chat_id">Telegram Chat ID</label>
-                                                        <input type="text" class="form-control" id="tgram_chat_id"
-                                                               name="tgram_chat_id"
-                                                               value="{{request.form['tgram_chat_id'] }}"
-                                                               placeholder="Telegram Chat ID">
+                                                        <label for="discord_username"></label>
+                                                        <input type="text" class="form-control" id="discord_username"
+                                                               value="{{request.form['discord_username'] }}"
+                                                               name="discord_username"
+                                                               placeholder="exemple: ChuckNorris#2556">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h5>Discord - {{user_data.discord}}</h5>
+                                            <h5>Discord (groupe) - {{user_data.discord}}</h5>
                                             <div class="row">
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group">
@@ -57,7 +57,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h5>Slack - {{user_data.slack}}</h5>
+                                            <h5>Telegram (groupe) - {{user_data.telegram}}</h5>
+                                            <div class="row">
+                                                <div class="col-sm-12 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="tgram_chat_id">Telegram Chat ID</label>
+                                                        <input type="text" class="form-control" id="tgram_chat_id"
+                                                               name="tgram_chat_id"
+                                                               value="{{request.form['tgram_chat_id'] }}"
+                                                               placeholder="Telegram Chat ID">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5>Slack (groupe) - {{user_data.slack}}</h5>
                                             <div class="row">
                                                 <div class="col-sm-3 mb-4">
                                                     <div class="form-group">
