@@ -28,22 +28,23 @@ class Alert(db.Model):
     low_threshold = db.Column(db.Integer, nullable=True)
     high_threshold = db.Column(db.Integer, nullable=True)
     reference_price = db.Column(db.Float, nullable=True)
+    notification_type = db.Column(db.String(16), nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     cmc_id = db.Column(db.Integer, db.ForeignKey("cryptos.cmc_id"))
     user_id = db.Column(db.String(64), db.ForeignKey("users.id"))
-    notification_id = db.relationship("Notification", backref="alerts")
+    # notification_id = db.relationship("Notification", backref="alerts")
 
 
-class Notification(db.Model):
-    __tablename__ = "notifications"
-
-    id = db.Column(db.Integer, primary_key=True)
-    slack = db.Column(db.String(64), nullable=True)
-    discord = db.Column(db.String(64), nullable=True)
-    telegram = db.Column(db.String(64), nullable=True)
-    alert_id = db.Column(db.String(64), db.ForeignKey("alerts.id"))
-    # comments = db.relationship("Alerts", backref="notifications")
-    # crypto_id = db.relationship("Notification", backref="cryptos")
+# class Notification(db.Model):
+#     __tablename__ = "notifications"
+#
+#     id = db.Column(db.Integer, primary_key=True)
+#     slack = db.Column(db.String(64), nullable=True)
+#     discord = db.Column(db.String(64), nullable=True)
+#     telegram = db.Column(db.String(64), nullable=True)
+#     alert_id = db.Column(db.String(64), db.ForeignKey("alerts.id"))
+#     # comments = db.relationship("Alerts", backref="notifications")
+#     # crypto_id = db.relationship("Notification", backref="cryptos")
 
 
 class User(db.Model, UserMixin):
@@ -53,6 +54,10 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(64), unique=True)
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.LargeBinary)
+    slack = db.Column(db.String(64), nullable=True)
+    discord = db.Column(db.String(64), nullable=True)
+    fomobot = db.Column(db.String(64), nullable=True)
+    telegram = db.Column(db.String(64), nullable=True)
 
     crypto_id = db.relationship("Crypto", backref="users")
 

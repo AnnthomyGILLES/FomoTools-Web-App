@@ -45,20 +45,19 @@
                 <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
                     class="nav-item {% if 'add_crypto' in segment %} active {% endif %}">
                     <a href="/add_crypto.html" class="nav-link">
-                        <span class="pcoded-micon"><i class="feather icon-phone-call"></i></span>
+                        <span class="pcoded-micon"><i class="feather icon-bell"></i></span>
                         <span class="pcoded-mtext">Créer une alerte</span></a>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
-                    <label>Mon profil</label>
+                    <label>Options</label>
                 </li>
-                <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
-                    class="nav-item pcoded-hasmenu">
-                    <a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span
-                            class="pcoded-mtext">Paramètres</span></a>
-                    <ul class="pcoded-submenu">
-                        <li class=""><a href="#" class="disabled"><i class="feather icon-user"></i> Mon profile</a></li>
-                        <li class=""><a href="#" class="disabled"><i class="feather icon-lock"></i> Mes tokens</a></li>
-                    </ul>
+                <li data-username="Profile page" class="nav-item {% if 'profile' in segment %} active {% endif %}">
+                    <a href="{{ url_for('home_blueprint.profile') }}" class="nav-link">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-user"></i>
+                        </span>
+                        <span class="pcoded-mtext">Mon profil</span>
+                    </a>
                 </li>
                 <li data-username="Disabled Menu" class="nav-item">
                     <a href="{{ url_for('authentication_blueprint.logout') }}" class="nav-link">
@@ -68,13 +67,38 @@
                 <li class="nav-item pcoded-menu-caption">
                     <label>Liens utiles</label>
                 </li>
-                <li data-username="Support Page" class="nav-item {% if 'support' in segment %} active {% endif %}">
-                    <a href="#" class="disabled">
-                        <span class="pcoded-micon">
-                            <i class="feather icon-headphones"></i>
-                        </span>
-                        <span class="pcoded-mtext">Support</span>
-                    </a>
+                <li data-username="Contactez-nous"
+                    class="nav-item pcoded-hasmenu">
+                    <a href="javascript:" class="nav-link {% if 'support' in segment %} active {% endif %}"><span class="pcoded-micon"><i class="feather icon-message-circle"></i></span><span
+                            class="pcoded-mtext">Contactez-nous</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class=""><a href="mailto:contact@ak-intelligence.com"><i class="feather icon-headphones"></i> Support</a></li>
+                        <li class=""><a href="#" class="disabled"><i class="feather icon-users"></i> Discord</a></li>
+                        <li class=""><a href="#" class="disabled"><i class="feather icon-users"></i> Forum</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Soutenez-nous (c'est apprécié!)</label>
+                    <br/>
+                    <span class="pcoded-mtext">PayPal</span>
+                    <br/>
+                    <span class="pcoded-mtext" style="font-size:8px;"><a href="https://paypal.me/Fomotools" target="_blank" rel="noopener noreferrer" >https://paypal.me/Fomotools</a></span>
+                    <br/>
+                    <span class="pcoded-mtext">BTC</span>
+                    <span class="pcoded-mtext" style="font-size:8px;"><a href="https://link.trustwallet.com/send?coin=0&address=bc1qgc30r04wzmdsgwz63jadasrrtdzz5mf58y5n8s" target="_blank" rel="noopener noreferrer" >bc1qgc30r04wzmdsgwz63jadasrrtdzz5mf58y5n8s</a></span>
+                    <br/>
+                    <span class="pcoded-mtext">ETH</span>
+                    <br/>
+                    <span class="pcoded-mtext" style="font-size:8px;"><a href="https://link.trustwallet.com/send?coin=60&address=0x09260890DDfe71223c8522534cc37D605Dd81D6A" target="_blank" rel="noopener noreferrer" >0x09260890DDfe71223c8522534cc37D605Dd81D6A</a></span>
+                    <br/>
+                    <span class="pcoded-mtext">BUSD</span>
+                    <br/>
+                    <span class="pcoded-mtext" style="font-size:8px;"><a href="https://link.trustwallet.com/send?coin=20000714&address=0x09260890DDfe71223c8522534cc37D605Dd81D6A&token_id=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56" target="_blank" rel="noopener noreferrer" >0x09260890DDfe71223c8522534cc37D605Dd81D6A</a></span>
+                    <br/>
+                    <span class="pcoded-mtext">SOL</span>
+                    <br/>
+                    <span class="pcoded-mtext" style="font-size:8px;"><a href="https://link.trustwallet.com/send?coin=501&address=AzC9Lius7sfVfompkLxPKpka2X9m7bPR1ivnDYMwPeL" target="_blank" rel="noopener noreferrer" >AzC9Lius7sfVfompkLxPKpka2X9m7bPR1ivnDYMwPeL</a></span>
+
                 </li>
             </ul>
         </div>

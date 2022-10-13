@@ -1,94 +1,146 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Profile {% endblock %} 
+{% block title %} Profile {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
-    <!-- [ Main Content ] start -->
-    <div class="pcoded-main-container">
-        <div class="pcoded-wrapper">
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
 
-            <div class="pcoded-content">
-                <div class="pcoded-inner-content">
-                    <div class="main-body">
-                        <div class="page-wrapper">
-                            <!-- [ Main Content ] start -->
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>Edit Info</h5>
-                                        </div>
-                                        <div class="card-block">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Edit Info</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <form method="POST" name="tokens">
+                                            <h5>Discord (utilisateur : le plus simple) - {{user_data.discord}}</h5>
+                                            <div class="row">
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="discord_username"></label>
+                                                        <input type="text" class="form-control" id="discord_username"
+                                                               value="{{request.form['discord_username'] }}"
+                                                               name="discord_username"
+                                                               placeholder="exemple: ChuckNorris#2556">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5>Discord (groupe) - {{user_data.discord}}</h5>
+                                            <div class="row">
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="discord_webhook">Webhook ID</label>
+                                                        <input type="text" class="form-control" id="discord_webhook"
+                                                               value="{{request.form['discord_webhook'] }}"
+                                                               name="discord_webhook"
+                                                               placeholder="WebhookID">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="discord_token">Webhook Token</label>
+                                                        <input type="text" class="form-control" id="discord_token"
+                                                               name="discord_token"
+                                                               value="{{request.form['discord_token'] }}"
+                                                               placeholder="WebhookToken">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5>Telegram (groupe) - {{user_data.telegram}}</h5>
                                             <div class="row">
                                                 <div class="col-sm-12 mb-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email address</label>
-                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label for="fn">First Name</label>
-                                                        <input type="email" class="form-control" id="fn" aria-describedby="emailHelp" placeholder="Enter email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label for="ln">Last Name</label>
-                                                        <input type="email" class="form-control" id="ln" aria-describedby="emailHelp" placeholder="Enter email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label for="add">Address</label>
-                                                        <input type="email" class="form-control" id="add" aria-describedby="emailHelp" placeholder="Enter email">
-                                                        <small id="addd" class="form-text text-muted">This is your shipments address</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label for="abt">About Info</label>
-                                                        <textarea type="email" class="form-control" id="abt" aria-describedby="emailHelp" placeholder="Bio"></textarea>
-                                                        <small id="abf" class="form-text text-muted">We'll show this on your profile.</small>
+                                                        <label for="tgram_chat_id">Telegram Chat ID</label>
+                                                        <input type="text" class="form-control" id="tgram_chat_id"
+                                                               name="tgram_chat_id"
+                                                               value="{{request.form['tgram_chat_id'] }}"
+                                                               placeholder="Telegram Chat ID">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <h5>Slack (groupe) - {{user_data.slack}}</h5>
+                                            <div class="row">
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_tokena">Token A</label>
+                                                        <input type="text" class="form-control" id="slack_tokena"
+                                                               value="{{request.form['slack_tokena'] }}"
+                                                               name="slack_tokena"
+                                                               placeholder="Token A">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_tokenb">Token B</label>
+                                                        <input type="text" class="form-control" id="slack_tokenb"
+                                                               value="{{request.form['slack_tokenb'] }}"
+                                                               name="slack_tokenb"
+                                                               placeholder="Token B">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_tokenc">Token C</label>
+                                                        <input type="text" class="form-control" id="slack_tokenc"
+                                                               value="{{request.form['slack_tokenc'] }}"
+                                                               name="slack_tokenc"
+                                                               placeholder="Token C">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="slack_channel">Channel</label>
+                                                        <input type="text" class="form-control" id="slack_channel"
+                                                               value="{{request.form['slack_channel'] }}"
+                                                               name="slack_channel"
+                                                               placeholder="Channel">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" id="tokens_submit">Soumettre
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <div class="card-block">
-                                            <div class="d-flex align-items-center justify-content-center flex-column">
-                                                <div class="w-50 p-3">
-                                                    <img src="https://via.placeholder.com/500" alt="profile image"
-                                                        class="img-fluid rounded-circle">
-                                                </div>
-                                                <div class="text-center">
-                                                    <h4 class="font-weight-bold h6">Author Name</h4>
-                                                    <p class="font-italic text-muted">Lorem ipsum dolor.</p>
-                                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="d-flex align-items-center justify-content-center flex-column">
+                                            <div class="w-50 p-3">
+                                                <img src="https://via.placeholder.com/500" alt="profile image"
+                                                     class="img-fluid rounded-circle">
                                             </div>
+                                            <div class="text-center">
+                                                <h4 class="font-weight-bold h6">{{ current_user.username }} </h4>
+                                                <p class="font-italic text-muted">Lorem ipsum dolor.</p>
+                                            </div>
+                                        </div>
 
-                                            <div class="small font-weight-light mt-4 text-center text-muted">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
-                                                    esse excepturi fugiat id numquam? Enim illo, perferendis. Eum, ratione,
-                                                    voluptas?</p>
-                                            </div>
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <a href="#" class="h6 text-muted d-block m-1"><i
-                                                        class="icon feather icon-facebook"></i></a>
-                                                <a href="#" class="h6 text-muted d-block m-1"><i
-                                                        class="icon feather icon-twitter"></i></a>
-                                                <a href="#" class="h6 text-muted d-block m-1"><i
-                                                        class="icon feather icon-instagram"></i></a>
+                                        <div class="small font-weight-light mt-4 text-center text-muted">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
+                                                esse excepturi fugiat id numquam? Enim illo, perferendis. Eum, ratione,
+                                                voluptas?</p>
+                                        </div>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a href="#" class="h6 text-muted d-block m-1"><i
+                                                    class="icon feather icon-facebook"></i></a>
+                                            <a href="#" class="h6 text-muted d-block m-1"><i
+                                                    class="icon feather icon-twitter"></i></a>
+                                            <a href="#" class="h6 text-muted d-block m-1"><i
+                                                    class="icon feather icon-instagram"></i></a>
 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -98,10 +150,10 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
-    <!-- [ Main Content ] end -->
+</div>
+<!-- [ Main Content ] end -->
 
 {% endblock content %}
 

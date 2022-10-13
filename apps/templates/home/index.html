@@ -24,22 +24,22 @@
                             <div class="col-md-6 col-xl-4">
                                 <div class="card daily-sales">
                                     <div class="card-block">
-                                        <h6 class="mb-4">Meilleure performance aujourd'hui: X </h6>
+                                        <h6 class="mb-4">Meilleure performance aujourd'hui : XXX</h6>
                                         <div class="row d-flex align-items-center">
                                             <div class="col-9">
                                                 <h3 class="f-w-300 d-flex align-items-center m-b-0"><i
                                                         class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$
-                                                    251.95</h3>
+                                                    0</h3>
                                             </div>
 
                                             <div class="col-3 text-right">
-                                                <p class="m-b-0">67%</p>
+                                                <p class="m-b-0">0%</p>
                                             </div>
                                         </div>
                                         <div class="progress m-t-30" style="height: 7px;">
                                             <div class="progress-bar progress-c-theme" role="progressbar"
-                                                style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                                 style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -49,21 +49,21 @@
                             <div class="col-md-6 col-xl-4">
                                 <div class="card Monthly-sales">
                                     <div class="card-block">
-                                        <h6 class="mb-4">Pire performance aujourd'hui: Y</h6>
+                                        <h6 class="mb-4">Pire performance aujourd'hui: YYY</h6>
                                         <div class="row d-flex align-items-center">
                                             <div class="col-9">
                                                 <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
                                                         class="feather icon-arrow-down text-c-red f-30 m-r-10"></i>$
-                                                    2.942.32</h3>
+                                                    0</h3>
                                             </div>
                                             <div class="col-3 text-right">
-                                                <p class="m-b-0">36%</p>
+                                                <p class="m-b-0">0%</p>
                                             </div>
                                         </div>
                                         <div class="progress m-t-30" style="height: 7px;">
                                             <div class="progress-bar progress-c-theme2" role="progressbar"
-                                                style="width: 35%;" aria-valuenow="35" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                                 style="width: 35%;" aria-valuenow="35" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -78,16 +78,16 @@
                                             <div class="col-9">
                                                 <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
                                                         class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$
-                                                    8.638.32</h3>
+                                                    0</h3>
                                             </div>
                                             <div class="col-3 text-right">
-                                                <p class="m-b-0">80%</p>
+                                                <p class="m-b-0">0%</p>
                                             </div>
                                         </div>
                                         <div class="progress m-t-30" style="height: 7px;">
                                             <div class="progress-bar progress-c-theme" role="progressbar"
-                                                style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                                 style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                                                 <thead>
                                                 {% for c in ["Logo", "Nom", "Prix", "Seuil bas", "Seuil haut",
                                                 "Date de création", "Alerté via"] %}
-                                                <th>{{c}}</th>
+                                                <th id="th_{{c}}">{{c}}</th>
                                                 {% endfor %}
                                                 </thead>
                                                 <tbody>
@@ -128,10 +128,10 @@
                                                         <h6 class="text-muted">{{crypto.high_threshold}}</h6>
                                                     </td>
                                                     <td>
-                                                        <h6 class="text-muted">{{crypto.date_created}}</h6>
+                                                        <h6 class="text-muted">{{crypto.date_created}} UTC</h6>
                                                     </td>
                                                     <td>
-                                                        <h6 class="text-muted">{{crypto.notification_method}}</h6>
+                                                        <h6 class="text-muted">{{crypto.notification_type}}</h6>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
@@ -152,29 +152,29 @@
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
-                                                    {% for c in columns %}
-                                                    <th>{{c}}</th>
-                                                    {% endfor %}
+                                                {% for c in columns %}
+                                                <th id="th_{{c}}">{{c}}</th>
+                                                {% endfor %}
                                                 </thead>
                                                 <tbody>
-                                                    {% for k, v in table_data.items() %}
-                                                    <tr class="unread">
-                                                        <td><img class="rounded-circle" style="width:40px;"
-                                                                src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
-                                                                alt="activity-user">
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="mb-1">{{v.name}}</h6>
-                                                            <p class="m-0">{{v.symbol}}</p>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="text-muted">{{v.rank}}</h6>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="text-muted">{{v.slug}}</h6>
-                                                        </td>
-                                                    </tr>
-                                                    {% endfor %}
+                                                {% for k, v in table_data.items() %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;"
+                                                             src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg"
+                                                             alt="activity-user">
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{v.name}}</h6>
+                                                        <p class="m-0">{{v.symbol}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">{{v.rank}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted">{{v.slug}}</h6>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -188,9 +188,10 @@
             </div>
         </div>
     </div>
-    <!-- [ Main Content ] end -->
+</div>
+<!-- [ Main Content ] end -->
 
-    {% endblock content %}
+{% endblock content %}
 
-    <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}{% endblock javascripts %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -14,10 +14,11 @@ from apps.authentication.models import (
     Crypto,
     Alert,
     User,
-    Notification,
 )
 from apps.coinmarketcap.coinmarketcap_api import CryptoMarket
 from apps.home import blueprint
+
+NOTIFICATIONS_METHODS = ("discord", "slack", "telegram", "fomobot")
 
 
 class NoInstanceFoundError(Exception):
@@ -30,11 +31,10 @@ def index():
     cmc = CryptoMarket()
 
     df = cmc.get_cryptos_names().sort_values(by="rank").head(10)
-    columns = ["CMC Id", "Name", "Rank", "Slug"]
+    columns = ["Logo", "Name", "Rank", "Slug"]
 
     table_d = df.to_dict(orient="index")
 
-    # User.query.filter_by(username='peter')
     username = current_user.username
 
     df = pd.read_sql(
@@ -48,23 +48,20 @@ def index():
                 Alert.high_threshold,
                 Alert.reference_price,
                 Alert.date_created,
-                Notification.discord,
-                Notification.slack,
-                Notification.telegram,
+                Alert.notification_type,
+                User.discord,
+                User.fomobot,
+                User.slack,
+                User.telegram,
             )
             .join(Crypto, Crypto.username == User.username)
             .join(Alert, Alert.cmc_id == Crypto.cmc_id)
-            .join(Notification)
             .filter(
                 User.username == username,
             )
         ).statement,
         con=db.session.bind,
     )
-    user_notification_method = (
-        df[["discord", "slack", "telegram"]].dropna(how="all", axis=1).columns
-    )
-    df["notification_method"] = ", ".join(user_notification_method)
     cryptos = df.to_dict(orient="index")
 
     return render_template(
@@ -76,11 +73,70 @@ def index():
     )
 
 
+@blueprint.route("/profile", methods=("GET", "POST"))
+@login_required
+def profile():
+    try:
+        segment = get_segment(request)
+        user = User.query.filter_by(username=current_user.username).first()
+
+        if request.method == "POST":
+            DEFAULT_VALUE = None
+            discord_webhook = request.form.get("discord_webhook", DEFAULT_VALUE)
+            discord_token = request.form.get("discord_token", DEFAULT_VALUE)
+            discord_username = request.form.get("discord_username", DEFAULT_VALUE)
+
+            slack_tokena = request.form.get("slack_tokena", DEFAULT_VALUE)
+            slack_tokenb = request.form.get("slack_tokenb", DEFAULT_VALUE)
+            slack_tokenc = request.form.get("slack_tokenc", DEFAULT_VALUE)
+            slack_channel = request.form.get("slack_channel", DEFAULT_VALUE)
+
+            tgram_chat_id = request.form.get("tgram_chat_id", DEFAULT_VALUE)
+            discord_key = "/".join(
+                filter(DEFAULT_VALUE, (discord_webhook, discord_token))
+            )
+            slack_key = "/".join(
+                filter(
+                    DEFAULT_VALUE,
+                    (slack_tokena, slack_tokenb, slack_tokenc, slack_channel),
+                )
+            )
+            if discord_key != "":
+                user.discord = discord_key
+            if slack_key != "":
+                user.slack = slack_key
+            if tgram_chat_id != "":
+                user.telegram = tgram_chat_id
+            if discord_username != "":
+                user.fomobot = discord_username
+
+            db.session.add(user)
+            db.session.commit()
+
+            return redirect(url_for("home_blueprint.index"))
+
+        user_data = user.__dict__.copy()
+        notifications = {k: user_data.get(k, None) for k in NOTIFICATIONS_METHODS}
+
+        # Serve the file (if exists) from app/templates/home/FILE.html
+        return render_template(
+            "home/profile.html", segment=segment, user_data=notifications
+        )
+
+    except TemplateNotFound:
+        return render_template("home/page-404.html"), 404
+
+
 @blueprint.route("/<template>", methods=("GET", "POST"))
 @login_required
 def route_template(template):
     try:
-
+        user = User.query.filter_by(username=current_user.username).first()
+        user_data = user.__dict__.copy()
+        notifications = {k: user_data.get(k, None) for k in NOTIFICATIONS_METHODS}
+        user_tokens = {
+            k: "true" if v is not None else "false" for k, v in notifications.items()
+        }
         cmc = CryptoMarket()
         df_cryptos = cmc.get_listings(convert="EUR")
         df_cryptos = df_cryptos[["id", "symbol", "slug", "quote.EUR.price"]].rename(
@@ -93,18 +149,41 @@ def route_template(template):
         segment = get_segment(request)
 
         if request.method == "POST":
-            price_notification_method = request.form["price_notification_method"]
-            slug = request.form["price_crypto_selected"]
+            price_notification_method = request.form.getlist(
+                "price_notification_method"
+            )
+            slug = request.form.get("price_crypto_selected")
+            low_threshold = request.form.get("price_low_threshold")
+            high_threshold = request.form.get("price_high_threshold")
+
+            if slug is None:
+                slug = request.form.get("percent_crypto_selected")
+            if not price_notification_method:
+                price_notification_method = request.form.getlist(
+                    "percent_notification_method"
+                )
+
             cmc_id, symbol, price_eur = df_cryptos[df_cryptos["slug"] == slug][
                 ["id", "symbol", "price_eur"]
             ].values.tolist()[0]
-            low_threshold = request.form["price_low_threshold"]
-            high_threshold = request.form["price_high_threshold"]
+
+            if low_threshold is None:
+                low_threshold = int(request.form["percent_low_threshold"])
+                low_threshold = price_eur - (price_eur * (low_threshold / 100))
+
+            if high_threshold is None:
+                high_threshold = int(request.form["percent_high_threshold"])
+                high_threshold = price_eur + (price_eur * (high_threshold / 100))
 
             if not slug:
                 flash("Slug is required!")
             elif not symbol:
                 flash("Symbol is required!")
+            elif not float(low_threshold) <= price_eur <= float(high_threshold):
+                flash(
+                    "Les seuils définis doivent contenir le prix de référence. Le prix de référence ne peut pas être "
+                    "inférieur au seuil inférieur, et supérieur au seuil supérieur."
+                )
             else:
                 user_id = (
                     User.query.filter(User.username == current_user.username).first().id
@@ -126,25 +205,23 @@ def route_template(template):
                     user_id=user_id,
                     cmc_id=cmc_id,
                     reference_price=price_eur,
-                )
-
-                notification = get_or_create(
-                    db.session,
-                    Notification,
-                    discord="1016780345712054322/ZLqpN63QakgG1mIdMCBdfdPvQN95fmwFhcWb-TkFe8a8ieJ6zMCikLUV5Cmb4IdOjgm1",
-                    alerts=alert,
+                    notification_type=",".join(price_notification_method),
                 )
 
                 db.session.add(crypto)
                 db.session.add(alert)
-                db.session.add(notification)
                 db.session.commit()
                 return redirect(url_for("home_blueprint.index"))
 
         cryptos = df_cryptos.to_dict(orient="index")
 
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment, cryptos=cryptos)
+        return render_template(
+            "home/" + template,
+            segment=segment,
+            cryptos=cryptos,
+            user_tokens=user_tokens,
+        )
 
     except TemplateNotFound:
         return render_template("home/page-404.html"), 404
