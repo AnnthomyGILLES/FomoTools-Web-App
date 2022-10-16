@@ -33,6 +33,7 @@ def send_discord_bot_notification(username, title, description, color=0xFF2600):
         member = client.get_user(user_id) or await client.fetch_user(user_id)
         embed = discord.Embed(title=title, description=description, color=color)
         await member.send(embed=embed)
+        await client.close()
 
     client.run(TOKEN)
 
