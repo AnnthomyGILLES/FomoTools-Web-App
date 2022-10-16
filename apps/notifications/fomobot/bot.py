@@ -39,6 +39,8 @@ def send_discord_bot_notification(username, title, description, color=0xFF2600):
 
 
 if __name__ == "__main__":
+    DISCORD_USER = os.getenv("DISCORD_USER")
+
     send_discord_bot_notification(
-        "annthomy#8614", title="test", description="test description"
+        DISCORD_USER, title="test", description="test description"
     )
