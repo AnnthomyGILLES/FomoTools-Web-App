@@ -27,12 +27,12 @@ lesscpy==0.15.1
 loguru==0.6.0
 Mako==1.2.4
 MarkupSafe==2.1.2
-mysqldbModel==1.1.0
+mysql-connector-python==8.0.32
 numpy==1.23.2
 pandas==1.4.4
 ply==3.11
+protobuf==3.20.3
 pyrsistent==0.19.3
-PyMySQL==1.0.2
 python-dateutil==2.8.2
 python-dotenv==0.19.2
 pytz==2022.7.1
