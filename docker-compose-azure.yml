@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  appseed-app:
+    container_name: appseed_app
+    restart: always
+    env_file: .env
+    build: .
+    networks:
+      - db_network
+      - web_network
+  nginx:
+    container_name: nginx
+    restart: always
+    image: "https://fomotoolsregistrydev.azurecr.io/nginx:latest"
+    ports:
+      - "80:80"
+    volumes:
+      type: bind
+      source: "${WEBAPP_STORAGE_HOME}/fomotoolshare"
+      target: "./nginx:/etc/nginx/conf.d"
+    networks:
+      - web_network
+    depends_on: 
+      - appseed-app
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
+ 
