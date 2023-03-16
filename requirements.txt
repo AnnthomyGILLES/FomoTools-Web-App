@@ -29,6 +29,7 @@ loguru==0.6.0
 Mako==1.2.4
 MarkupSafe==2.1.2
 mysql-connector-python==8.0.32
+mysqlclient==2.1.1
 numpy==1.23.2
 pandas==1.4.4
 ply==3.11
