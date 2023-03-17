@@ -20,9 +20,23 @@ services:
       - web_network
     depends_on: 
       - appseed-app
+  mysql:
+    container_name: mysql
+    restart: always
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appseed_db
+      MYSQL_USER: appseed_db_usr
+      MYSQL_PASSWORD: pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - db_network
+volumes:
+  mysql_data:
 networks:
   db_network:
     driver: bridge
   web_network:
     driver: bridge
- 
