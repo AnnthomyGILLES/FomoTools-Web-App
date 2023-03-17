@@ -31,7 +31,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
     # PostgreSQL database
-    SQLALCHEMY_DATABASE_URI = 'mysql://appseed_db_usr:pass@localhost:3306/appseed_db'
+    SQLALCHEMY_DATABASE_URI = 'mysql://appseed_db_usr:pass@mysql:3306/appseed_db'
 
     
     # "{}://{}:{}@{}:{}/{}".format(
