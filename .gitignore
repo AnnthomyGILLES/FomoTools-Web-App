@@ -161,3 +161,9 @@ cython_debug/
 
 # VScode stuff
 .vscode
+
+# SQlite stuff
+apps/db.sqlite3
+
+# Mac stuff
+*.DS_Store
