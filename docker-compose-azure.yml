@@ -3,7 +3,7 @@ services:
   appseed-app:
     container_name: appseed_app
     restart: always
-    env_file: .env
+    env_file: filesharefomotoolsreal:/app/wwwroot/afterrootdirectory/.env
     build: .
     networks:
       - db_network
@@ -15,7 +15,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - filesharefomotoolsreal:/app/wwwroot/afterrootdirectory/conf.d
     networks:
       - web_network
     depends_on: 
@@ -36,7 +36,7 @@ services:
       # Opens port 3306 on the container
       - '3306'
     volumes:
-      - mysql_data:/var/lib/mysql
+      - filesharefomotoolsreal:/app/wwwroot/afterrootdirectory
     networks:
       - db_network
 volumes:

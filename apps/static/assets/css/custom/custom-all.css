@@ -1,0 +1,19 @@
+.nav-link.active {
+    background: #3f4d67 !important;
+}
+
+.btn-primary:not(:hover){
+    background: #3f4d67 !important;
+    border-color: #3f4d67 !important;
+}
+
+button:hover{
+    background-color: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+}
+
+#percentage-tab:hover, #price-tab:hover {
+    color: #ffffff !important;
+    background-color: #00bcd4 !important;
+    border-radius: 5px ;
+}

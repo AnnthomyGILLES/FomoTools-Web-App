@@ -10,7 +10,16 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
+# install mysql dependencies
+RUN apt-get update && \
+    apt-get install -y default-libmysqlclient-dev
+
+RUN apt-get update && \
+    apt-get install python3-mysqldb
+
+
 COPY . .
 
 # gunicorn
 CMD ["gunicorn", "--config", "gunicorn-cfg.py", "run:app"]
+

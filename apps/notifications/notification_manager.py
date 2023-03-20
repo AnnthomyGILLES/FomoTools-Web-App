@@ -28,23 +28,25 @@ class Notifier(object):
         return cls(service, base_url)
 
     @classmethod
-    def to_telegram(cls, bot_token):
+    def to_telegram(
+        cls,
+        chat_id,
+        bot_token="5533435857:AAHSLl36GXUtPUNpGQbYtkYs8Y_yx_g7mzE",
+    ):
         """Telegram bot Link: http://t.me/FomotoolsBot"""
         service = "Telegram"
-        base_url = f"tgram://{bot_token}/679706949"
+        base_url = f"tgram://{bot_token}/{chat_id}"
         return cls(service, base_url)
 
 
 if __name__ == "__main__":
-    # notifier = Notifier()
-
     # discord_params = {
     #     "webhook_id": "1016780345712054322",
     #     "webhook_token": "ZLqpN63QakgG1mIdMCBdfdPvQN95fmwFhcWb-TkFe8a8ieJ6zMCikLUV5Cmb4IdOjgm1",
     #     "title": "Gotama is a damn genius",
     #     "body": "Yes you are baby!",
     # }
-    # notifier.notify_discord(**discord_params)
+    # notifier = Notifier.to_discord(**discord_params)
     #
     # slack_params = {
     #     "token_a": "T4B9F46TA",
@@ -54,6 +56,6 @@ if __name__ == "__main__":
     #     "title": "Gotama is a damn genius",
     #     "body": "Yes you are baby!",
     # }
-    # notifier.notify_slack(**slack_params)
-    notifier = Notifier.to_telegram("5533435857:AAHSLl36GXUtPUNpGQbYtkYs8Y_yx_g7mzE")
+    # notifier = Notifier.to_slack(**slack_params)
+    notifier = Notifier.to_telegram("679706949")
     notifier.notify(title="Gotama is a damn genius", body="Yes you are baby!")
