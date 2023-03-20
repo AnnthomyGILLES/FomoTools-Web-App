@@ -3,7 +3,7 @@ services:
   appseed-app:
     container_name: appseed_app
     restart: always
-    env_file: .env
+    env_file: filesharefomotoolsreal:/app/wwwroot/afterrootdirectory/.env
     build: .
     networks:
       - db_network
@@ -11,20 +11,38 @@ services:
   nginx:
     container_name: nginx
     restart: always
-    image: "https://fomotoolsregistrydev.azurecr.io/nginx:latest"
+    image: "nginx:latest"
     ports:
       - "80:80"
     volumes:
-      type: bind
-      source: "${WEBAPP_STORAGE_HOME}/fomotoolshare"
-      target: "./nginx:/etc/nginx/conf.d"
+      - filesharefomotoolsreal:/app/wwwroot/afterrootdirectory/conf.d
     networks:
       - web_network
     depends_on: 
       - appseed-app
+  mysql:
+    container_name: mysql
+    restart: always
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appseed_db
+      MYSQL_USER: appseed_db_usr
+      MYSQL_PASSWORD: pass
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+    volumes:
+      - filesharefomotoolsreal:/app/wwwroot/afterrootdirectory
+    networks:
+      - db_network
+volumes:
+  mysql_data:
 networks:
   db_network:
     driver: bridge
   web_network:
     driver: bridge
- 
