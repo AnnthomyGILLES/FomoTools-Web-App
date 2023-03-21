@@ -6,3 +6,4 @@ Env files are in:
     - root folder
     - apps/fomobot
     - apps/notifications
+    - apps/notifications/fomobot
