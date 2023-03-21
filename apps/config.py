@@ -31,17 +31,17 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
     # PostgreSQL database
-    SQLALCHEMY_DATABASE_URI = 'mysql://appseed_db_usr:pass@mysql:3306/appseed_db'
+    # SQLALCHEMY_DATABASE_URI = 'mysql://appseed_db_usr:pass@mysql:3306/appseed_db'
 
     
-    # "{}://{}:{}@{}:{}/{}".format(
-    #     os.getenv("DB_ENGINE", "mysql+pymysql"),
-    #     os.getenv("DB_USERNAME", "appseed_db_usr"),
-    #     os.getenv("DB_PASS", "pass"),
-    #     os.getenv("DB_HOST", "localhost"),
-    #     os.getenv("DB_PORT", 3306),
-    #     os.getenv("DB_NAME", "appseed_db"),
-    # )
+    "{}://{}:{}@{}:{}/{}".format(
+        os.getenv("DB_ENGINE", "mysql+pymysql"),
+        os.getenv("DB_USERNAME", "appseed_db_usr"),
+        os.getenv("DB_PASS", "pass"),
+        os.getenv("DB_HOST", "localhost"),
+        os.getenv("DB_PORT", 3306),
+        os.getenv("DB_NAME", "appseed_db"),
+    )
 
 
 class DebugConfig(Config):
