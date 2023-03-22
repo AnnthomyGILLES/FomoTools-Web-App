@@ -40,22 +40,5 @@ class Notifier(object):
 
 
 if __name__ == "__main__":
-    # discord_params = {
-    #     "webhook_id": "1016780345712054322",
-    #     "webhook_token": "ZLqpN63QakgG1mIdMCBdfdPvQN95fmwFhcWb-TkFe8a8ieJ6zMCikLUV5Cmb4IdOjgm1",
-    #     "title": "Gotama is a damn genius",
-    #     "body": "Yes you are baby!",
-    # }
-    # notifier = Notifier.to_discord(**discord_params)
-    #
-    # slack_params = {
-    #     "token_a": "T4B9F46TA",
-    #     "token_b": "B041EBNH1GB",
-    #     "token_c": "ho0azCXR821cJd8bwVaJ3SFh",
-    #     "channel": "general",
-    #     "title": "Gotama is a damn genius",
-    #     "body": "Yes you are baby!",
-    # }
-    # notifier = Notifier.to_slack(**slack_params)
     notifier = Notifier.to_telegram("679706949")
     notifier.notify(title="Gotama is a damn genius", body="Yes you are baby!")
