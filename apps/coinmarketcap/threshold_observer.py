@@ -97,14 +97,10 @@ def send_notification(data):
 
 
 if __name__ == "__main__":
-    # WARNING: Don't run with debug turned on in production!
-    DEBUG = "True"
-
     # The configuration
-    get_config_mode = "Debug" if DEBUG else "Production"
+    get_config_mode = "Production"
 
     try:
-
         # Load the configuration using the default values
         app_config = config_dict[get_config_mode.capitalize()]
 
