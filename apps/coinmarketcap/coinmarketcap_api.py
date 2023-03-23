@@ -85,8 +85,8 @@ class CryptoMarket(object):
 if __name__ == "__main__":
     cmc = CryptoMarket()
     parameters = {"slug": "bitcoin", "convert": "EUR"}
-    info = cmc.get_quotes(**parameters)
-    print(info)
+    # info = cmc.get_quotes(**parameters)
+    # pprint.pprint(info)
     #
     df = cmc.get_listings(convert="EUR")
     df = df[["symbol", "slug", "quote.EUR.price"]].rename(
