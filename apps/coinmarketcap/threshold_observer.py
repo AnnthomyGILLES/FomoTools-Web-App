@@ -110,6 +110,8 @@ if __name__ == "__main__":
     app = create_app(app_config)
     Migrate(app, db)
 
+    df_user_notifications = pd.DataFrame()
+
     with app.app_context():
         data = pd.read_sql(
             sql=(
@@ -133,5 +135,7 @@ if __name__ == "__main__":
             con=db.session.bind,
         )
 
-        df_user_notifications = detect_threshold(data)
-        send_notification(df_user_notifications)
+        if not data.empty:
+            df_user_notifications = detect_threshold(data)
+        if not df_user_notifications.empty:
+            send_notification(df_user_notifications)
