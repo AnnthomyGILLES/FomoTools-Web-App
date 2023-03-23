@@ -4,7 +4,8 @@ FROM python:3.9
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt .
+WORKDIR /fomocode
+COPY requirements.txt /fomocode
 
 # install python dependencies
 RUN pip install --upgrade pip
@@ -17,8 +18,11 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install python3-mysqldb
 
+COPY . /fomocode
 
-COPY . .
+RUN pip install -r requirements.txt
+
+ENV PYTHONPATH /fomocode
 
 # gunicorn
 CMD ["gunicorn", "--config", "gunicorn-cfg.py", "run:app"]
