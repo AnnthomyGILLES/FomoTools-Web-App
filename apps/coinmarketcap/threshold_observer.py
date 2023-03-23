@@ -133,5 +133,6 @@ if __name__ == "__main__":
             con=db.session.bind,
         )
 
-        df_user_notifications = detect_threshold(data)
-        send_notification(df_user_notifications)
+        if not data.empty:
+            df_user_notifications = detect_threshold(data)
+            send_notification(df_user_notifications)
