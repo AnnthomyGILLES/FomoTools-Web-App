@@ -20,7 +20,7 @@ RUN apt-get update && \
 
 # Certbot official installation procedure https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
 RUN apt-get update && \ 
-    apt apt-get install snapd
+    apt-get install snapd
 
 RUN apt-get update && \ 
     sudo snap install core; sudo snap refresh core
