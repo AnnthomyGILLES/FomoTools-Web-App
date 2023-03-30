@@ -1,4 +1,4 @@
-FROM certbot/certbot:latest
+FROM python:3.9
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -16,23 +16,7 @@ RUN apt-get update && \
     apt-get install -y default-libmysqlclient-dev
 
 RUN apt-get update && \
-    apt-get install -y python3-mysqldb
-
-# Certbot official installation procedure https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
-RUN apt-get update && \ 
-    apt-get install -y snapd && \
-
-RUN apt-get update && \
-    apt-get install -y sudo
-
-RUN echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap install core
-    
-RUN echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap refresh core
-   
-RUN echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap install --classic certbot
-   
-RUN echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S  ln -s /snap/bin/certbot /usr/bin/certbot
-
+    apt-get install python3-mysqldb
 
 COPY . /fomocode
 
