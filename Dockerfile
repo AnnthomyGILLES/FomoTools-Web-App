@@ -16,11 +16,11 @@ RUN apt-get update && \
     apt-get install -y default-libmysqlclient-dev
 
 RUN apt-get update && \
-    apt-get install python3-mysqldb
+    apt-get install -y python3-mysqldb
 
 # Certbot official installation procedure https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
 RUN apt-get update && \ 
-    apt-get install snapd
+    apt-get install -y snapd
 
 RUN apt-get update && \ 
     echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S sudo snap install core
