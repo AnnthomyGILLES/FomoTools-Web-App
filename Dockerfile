@@ -22,13 +22,13 @@ RUN apt-get update && \
 RUN apt-get update && \ 
     apt-get install -y snapd
 
-RUN echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap install core
+RUN snap install core
     
-RUN  echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap refresh core
+RUN snap refresh core
    
-RUN  echo 'RpEEnjeq7VSyOZvkC3G6' | sudo snap install --classic certbot
+RUN snap install --classic certbot
    
-RUN echo 'RpEEnjeq7VSyOZvkC3G6' | sudo ln -s /snap/bin/certbot /usr/bin/certbot
+RUN sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 
 COPY . /fomocode
