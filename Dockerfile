@@ -18,6 +18,19 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install python3-mysqldb
 
+# Certbot official installation procedure https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
+RUN apt-get update && \ 
+    apt apt-get install snapd
+
+RUN apt-get update && \ 
+    sudo snap install core; sudo snap refresh core
+
+RUN apt-get update && \ 
+    sudo snap install --classic certbot
+
+RUN sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+
 COPY . /fomocode
 
 RUN pip install -r requirements.txt
