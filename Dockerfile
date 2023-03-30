@@ -23,10 +23,10 @@ RUN apt-get update && \
     apt-get install -y snapd
 
 RUN apt-get update && \ 
-    echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S sudo snap install core
+    echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap install core
 
 RUN apt-get update && \ 
-    echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S sudo snap refresh core
+    echo 'RpEEnjeq7VSyOZvkC3G6' | sudo -S snap refresh core
 
 RUN apt-get update && \ 
     echo 'RpEEnjeq7VSyOZvkC3G6' | sudo snap install --classic certbot
