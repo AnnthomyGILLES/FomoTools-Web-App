@@ -19,7 +19,8 @@ services:
       - ./nginx:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
       # MINDSERS- ./certbot/conf/:/etc/nginx/ssl/:ro
-      - ./etc/nginx/ssl/live/:/etc/nginx/ssl/:ro
+      - ./etc/nginx/ssl/live/dev.fomotools.live/fullchain.pem:/etc/nginx/ssl/live/dev.fomotools.live/fullchain.pem
+      - ./etc/nginx/ssl/live/dev.fomotools.live/privkey.pem:/etc/nginx/ssl/live/dev.fomotools.live/privkey.pem
       
     networks:
       - web_network
