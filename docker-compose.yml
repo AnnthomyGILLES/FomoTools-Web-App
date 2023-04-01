@@ -10,7 +10,7 @@ services:
       - web_network
   nginx:
     container_name: nginx
-    # restart: always
+    restart: always
     image: "nginx:latest"
     ports:
       - "80:80"
