@@ -18,9 +18,9 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
-      # MINDSERS- ./certbot/conf/:/etc/nginx/ssl/:ro
-      - ./etc/nginx/ssl/live/dev.fomotools.live/fullchain.pem:/etc/nginx/ssl/live/dev.fomotools.live/fullchain.pem
-      - ./etc/nginx/ssl/live/dev.fomotools.live/privkey.pem:/etc/nginx/ssl/live/dev.fomotools.live/privkey.pem
+      - ./certbot/conf/:/etc/nginx/ssl/:ro 
+      # - ./etc/nginx/ssl/live/dev.fomotools.live/fullchain.pem:/etc/nginx/ssl/live/dev.fomotools.live/fullchain.pem #WORKED
+      # - ./etc/nginx/ssl/live/dev.fomotools.live/privkey.pem:/etc/nginx/ssl/live/dev.fomotools.live/privkey.pem #WORKED
       
     networks:
       - web_network
