@@ -14,12 +14,18 @@ services:
     image: "nginx:latest"
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - ./nginx:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
     networks:
       - web_network
     depends_on: 
       - appseed-app
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
   mysql:
     container_name: mysql
     restart: always
