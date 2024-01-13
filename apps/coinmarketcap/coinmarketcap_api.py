@@ -24,7 +24,7 @@ class CryptoMarket(object):
 
     HEADERS = {
         "Accepts": "application/json",
-        "X-CMC_PRO_API_KEY": "74868bae-9a4c-4b7f-9869-3a69f0b808ff",
+        "X-CMC_PRO_API_KEY": "xxxxx-xxxxx-xxx-xxxx-xxxxxxx",
     }
 
     ENDPOINTS = {
